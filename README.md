@@ -77,43 +77,43 @@ const path = require.resolve("~/some/path");
 1. Install as a dev dependency using npm or yarn, along with
    [Typescript](https://www.npmjs.com/package/typescript) 3.x or later.
 
-   ```sh
-   yarn add -D resolve-tspaths typescript
-   ```
+    ```sh
+    yarn add -D resolve-tspaths typescript
+    ```
 
-   ```sh
-   npm install --save-dev resolve-tspaths typescript
-   ```
+    ```sh
+    npm install --save-dev resolve-tspaths typescript
+    ```
 
 2. Add it as a part of your build script in `package.json` after `tsc`.
 
-   ```json
-   {
-     "scripts": {
-       "build": "tsc && resolve-tspaths"
-     }
-   }
-   ```
+    ```json
+    {
+    	"scripts": {
+    		"build": "tsc && resolve-tspaths"
+    	}
+    }
+    ```
 
 ## Programmatic Usage
 
 1. Install as a dev dependency using npm or yarn, along with
    [Typescript](https://www.npmjs.com/package/typescript) 3.x or later.
 
-   ```sh
-   yarn add -D resolve-tspaths typescript
-   ```
+    ```sh
+    yarn add -D resolve-tspaths typescript
+    ```
 
-   ```sh
-   npm install --save-dev resolve-tspaths typescript
-   ```
+    ```sh
+    npm install --save-dev resolve-tspaths typescript
+    ```
 
 2. Import the `resolveTsPaths` function and call it with the appropriate
    options.
 
-   ```ts
-   import { resolveTsPaths } from "resolve-tspaths";
-   ```
+    ```ts
+    import { resolveTsPaths } from "resolve-tspaths";
+    ```
 
 ## Options
 
@@ -142,12 +142,12 @@ not provided.
 Provide a space-delimited list of file extensions in the output directory that
 the program should process. Defaults to the following extensions:
 
-- `js`
-- `mjs`
-- `cjs`
-- `d.ts`
-- `d.mts`
-- `d.cts`
+-   `js`
+-   `mjs`
+-   `cjs`
+-   `d.ts`
+-   `d.mts`
+-   `d.cts`
 
 #### `--verbose`
 
