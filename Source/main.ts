@@ -47,7 +47,7 @@ function main() {
 
     if (options.noEmit) {
       logger.info(
-        bold("resolve-tspaths:"),
+        bold("@playform/resolve:"),
         "discovered",
         changes.length,
         "file(s) for change (none actually changed since --noEmit was given)",
@@ -55,7 +55,7 @@ function main() {
     } else {
       applyChanges(changes);
       logger.info(
-        bold("resolve-tspaths:"),
+        bold("@playform/resolve:"),
         "changed",
         changes.length,
         "file(s)",

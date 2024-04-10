@@ -5,7 +5,7 @@ import { version } from "~/version.json";
 
 const example = `
 Example:
-$ resolve-tspaths --project tsconfig.json --src ./src -out ./dist
+$ @playform/resolve --project tsconfig.json --src ./src -out ./dist
 `;
 
 /**
@@ -16,7 +16,7 @@ export function createProgram() {
 
   program
     .version(version)
-    .name("resolve-tspaths")
+    .name("@playform/resolve")
     .addHelpText("after", example)
     .option("-p, --project <path>", "path to tsconfig file", "tsconfig.json")
     .option("-s, --src <path>", "path to source directory")
