@@ -9,8 +9,8 @@ import { generateChanges } from "~/steps/generateChanges";
 import { applyChanges } from "~/steps/applyChanges";
 
 export type ResolveTsPathOptions = Omit<
-  Partial<ProgramOptions>,
-  "verbose" | "noEmit"
+	Partial<ProgramOptions>,
+	"verbose" | "noEmit"
 >;
 
 /**
@@ -18,21 +18,21 @@ export type ResolveTsPathOptions = Omit<
  * in your transpiled JavaScript code.
  */
 export async function resolveTsPaths(
-  options: ResolveTsPathOptions = {},
+	options: ResolveTsPathOptions = {}
 ): Promise<void> {
-  const {
-    project = "tsconfig.json",
-    src = "src",
-    ext = DEFAULT_EXTENSIONS,
-    out,
-  } = options;
-  const tsConfig = loadTSConfig(project);
-  const programPaths = resolvePaths({ project, src, out }, tsConfig);
-  const aliases = computeAliases(
-    programPaths.basePath,
-    tsConfig?.options?.paths ?? {},
-  );
-  const files = getFilesToProcess(programPaths.outPath, ext);
-  const changes = generateChanges(files, aliases, programPaths);
-  applyChanges(changes);
+	const {
+		project = "tsconfig.json",
+		src = "src",
+		ext = DEFAULT_EXTENSIONS,
+		out,
+	} = options;
+	const tsConfig = loadTSConfig(project);
+	const programPaths = resolvePaths({ project, src, out }, tsConfig);
+	const aliases = computeAliases(
+		programPaths.basePath,
+		tsConfig?.options?.paths ?? {}
+	);
+	const files = getFilesToProcess(programPaths.outPath, ext);
+	const changes = generateChanges(files, aliases, programPaths);
+	applyChanges(changes);
 }

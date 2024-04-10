@@ -8,7 +8,7 @@ import type { Change } from "~/types";
  * @param changes The file changes to apply.
  */
 export function applyChanges(changes: Change[]) {
-  changes.forEach(({ file, text }) => {
-    writeFileSync(file, text, { encoding: "utf-8" });
-  });
+	changes.forEach(({ file, text }) => {
+		writeFileSync(file, text, { encoding: "utf-8" });
+	});
 }

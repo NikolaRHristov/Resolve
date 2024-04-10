@@ -6,10 +6,8 @@
  *
  * @param path The path to normalize.
  */
-export function normalizePath(path: string): string {
-  return path
-    .replace(/^\\\\\?\\/, "")
-    .replace(/\\/g, "/")
-    .replace(/\/\/+/g, "/")
-    .replace(/^.\/\.\.\//g, "../");
-}
+export default (Path: string) =>
+	Path.replace(/^\\\\\?\\/, "")
+		.replace(/\\/g, "/")
+		.replace(/\/\/+/g, "/")
+		.replace(/^.\/\.\.\//g, "../");

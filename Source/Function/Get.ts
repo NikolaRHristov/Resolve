@@ -10,14 +10,14 @@ import { normalizePath } from "~/utils/path";
  * @param extensions A list of extensions to match.
  */
 export function getFilesToProcess(outPath: string, extensions: string[]) {
-  const normalizedOutPath = normalizePath(outPath);
+	const normalizedOutPath = normalizePath(outPath);
 
-  let glob = "*";
-  if (extensions.length === 1) glob = `*.${extensions[0]}`;
-  else if (extensions.length > 1) glob = `*.{${extensions.join(",")}}`;
+	let glob = "*";
+	if (extensions.length === 1) glob = `*.${extensions[0]}`;
+	else if (extensions.length > 1) glob = `*.{${extensions.join(",")}}`;
 
-  return sync(`${normalizedOutPath}/**/${glob}`, {
-    dot: true,
-    onlyFiles: true,
-  }).map((path) => resolve(path));
+	return sync(`${normalizedOutPath}/**/${glob}`, {
+		dot: true,
+		onlyFiles: true,
+	}).map((path) => resolve(path));
 }
