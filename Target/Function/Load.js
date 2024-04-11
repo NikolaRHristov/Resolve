@@ -1,0 +1,1 @@
+import{dirname as t}from"path";import{findConfigFile as f,parseJsonConfigFileContent as s,readConfigFile as c,sys as i}from"typescript";import{FileNotFoundError as m}from"~/utils/errors";function g(n){const o=f(process.cwd(),i.fileExists,n);if(!o)throw new m(g.name,n);const r=c(o,i.readFile),e=t(o);return s(r.config,i,e)}export{g as loadTSConfig};

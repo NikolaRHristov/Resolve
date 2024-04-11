@@ -1,0 +1,1 @@
+import{resolve as i}from"path";import{sync as m}from"fast-glob";import{normalizePath as n}from"~/utils/path";function p(o,r){const e=n(o);let t="*";return r.length===1?t=`*.${r[0]}`:r.length>1&&(t=`*.{${r.join(",")}}`),m(`${e}/**/${t}`,{dot:!0,onlyFiles:!0}).map(l=>i(l))}export{p as getFilesToProcess};

@@ -1,0 +1,1 @@
+import{resolve as a}from"path";import{InvalidAliasError as n}from"~/utils/errors";function p(i,t){const s=/\*$/,e=Object.keys(t).map(r=>({alias:r,prefix:r.replace(s,""),aliasPaths:t[r].map(o=>a(i,o.replace(s,"")))}));for(const{alias:r}of e)if(r.startsWith("./")||r.startsWith("../"))throw new n(p.name,r);return e}export{p as computeAliases};
