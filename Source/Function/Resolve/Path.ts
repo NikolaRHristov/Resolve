@@ -1,8 +1,11 @@
 import { resolve, dirname } from "path";
 
-import { Step, TSConfigPropertyError } from "~/utils/errors";
+import Step from "@Class/Error/Step";
+import TSConfigPropertyError from "@Class/Error/TSConfigPropertyError.js";
 
-import type { ProgramOptions, ProgramPaths, TSConfig } from "~/types";
+import type ProgramOptions from "@Interface/ProgramOptions.js";
+import type ProgramPaths from "@Interface/ProgramPaths.js";
+import type TSConfig from "@Interface/TSConfig.js";
 
 /**
  * Resolve paths provided to the program to absolute paths.
@@ -14,7 +17,7 @@ export default (
 	const { baseUrl = "", outDir, paths } = tsConfig.options ?? {};
 
 	const out = options.out ?? outDir;
-	
+
 	if (!out) {
 		throw new Step(
 			resolvePaths.name,
@@ -22,11 +25,12 @@ export default (
 		);
 	}
 
-	if (!paths)
+	if (!paths) {
 		throw new TSConfigPropertyError(
 			resolvePaths.name,
 			"compilerOptions.paths"
 		);
+	}
 
 	const configFile = resolve(process.cwd(), options.project);
 	const configPath = dirname(configFile);

@@ -1,6 +1,6 @@
-export class TSConfigPropertyError extends Step {
+export default class extends (await import("@Class/Error/Step.js")).default {
 	constructor(
-		public readonly step: string,
+		public override readonly step: string,
 		public readonly property: string
 	) {
 		super(step, `${property} is not set in tsconfig`);
