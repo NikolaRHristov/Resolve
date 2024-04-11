@@ -4,4 +4,5 @@ import type { Change } from "~/types";
  *
  * @param changes The file changes to apply.
  */
-export declare function applyChanges(changes: Change[]): void;
+declare const _default: (changes: Change[]) => void;
+export default _default;

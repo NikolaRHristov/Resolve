@@ -72,6 +72,7 @@ export function replaceAliasPathsInFile(
 		throw new FileNotFoundError(replaceAliasPathsInFile.name, filePath);
 
 	const originalText = readFileSync(filePath, "utf-8");
+
 	const changes: TextChange[] = [];
 
 	const newText = originalText.replace(
@@ -128,7 +129,9 @@ export function aliasToRelativePath(
 	esModule?: boolean
 ): { file: string; original: string; replacement?: string } {
 	const sourceFile = resolve(srcPath, relative(outPath, outputFile));
+
 	const sourceFileDirectory = dirname(sourceFile);
+
 	const outputFileDirectory = dirname(outputFile);
 
 	const importPathIsRelative =
@@ -187,6 +190,7 @@ export function aliasToRelativePath(
 	const jsxFileExists = isFile(
 		resolve(outputFileDirectory, relativePathJsExtension)
 	);
+
 	const relativePathJsxExtension = jsxFileExists
 		? relativePathJsExtension
 		: relativePathJsExtension.replace(/\.jsx$/, ".js");

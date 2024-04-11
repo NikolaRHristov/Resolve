@@ -1,1 +1,1 @@
-import{writeFileSync as t}from"fs";function r(e){e.forEach(({file:n,text:o})=>{t(n,o,{encoding:"utf-8"})})}export{r as applyChanges};
+import{writeFileSync as r}from"fs";var i=e=>{e.forEach(({file:t,text:o})=>{r(t,o,{encoding:"utf-8"})})};export{i as default};

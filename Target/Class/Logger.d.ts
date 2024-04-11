@@ -1,9 +1,9 @@
 export type LoggerLevel = "verbose" | "info" | "error";
-export declare class Logger {
+export default class {
     readonly level: LoggerLevel;
     constructor(level: LoggerLevel);
-    verbose(...args: any[]): void;
-    info(...args: any[]): void;
+    verbose(...args: (string | undefined)[]): void;
+    info(...args: (string | number)[]): void;
     error(...args: any[]): void;
     fancyParams<T extends {
         [key: string]: any;

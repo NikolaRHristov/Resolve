@@ -16,6 +16,7 @@ import Apply from "@Function/Apply.js";
 
 export const main = () => {
 	const options = Create().parse().opts<ProgramOptions>();
+
 	const logger = new Logger(options.verbose ? "verbose" : "info");
 
 	logger.verbose();

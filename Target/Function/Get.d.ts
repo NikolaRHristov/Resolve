@@ -4,4 +4,5 @@
  * @param outPath The output directory.
  * @param extensions A list of extensions to match.
  */
-export declare function getFilesToProcess(outPath: string, extensions: string[]): string[];
+declare const _default: (outPath: string, extensions: string[]) => string[];
+export default _default;

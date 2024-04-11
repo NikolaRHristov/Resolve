@@ -13,6 +13,7 @@ export default (outPath: string, extensions: string[]) => {
 	const normalizedOutPath = normalizePath(outPath);
 
 	let glob = "*";
+
 	if (extensions.length === 1) glob = `*.${extensions[0]}`;
 	else if (extensions.length > 1) glob = `*.{${extensions.join(",")}}`;
 

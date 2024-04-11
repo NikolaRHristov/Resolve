@@ -9,7 +9,8 @@ export declare const COMMONJS_IMPORT_EXPORT_REGEX: RegExp;
  * @param aliases The path mapping configuration from tsconfig.
  * @param programPaths Program options.
  */
-export declare function generateChanges(files: string[], aliases: Alias[], programPaths: Pick<ProgramPaths, "srcPath" | "outPath">): Change[];
+declare const _default: (files: string[], aliases: Alias[], programPaths: Pick<ProgramPaths, "srcPath" | "outPath">) => Change[];
+export default _default;
 /**
  * Read the file at the given path and return the text with aliased paths replaced.
  *
