@@ -1,0 +1,116 @@
+
+> @playform/resolve@0.0.1 prepublishOnly D:\Developer\Application\Playform\NPM\Resolve
+> Build 'Source/**/*.ts'
+
+
+  Target\Function\Generate.js    2.3kb
+  Target\Class\Resolve.js        1.2kb
+  Target\Class\Logger.js         628b 
+  Target\Function\Create.js      606b 
+  Target\Function\Resolve\Ts.js  605b 
+  ...and 20 more output files...
+
+⚡ Done in 99ms
+
+  Target/Function/Generate.js ──────────────────── 2.3kb ─ 100.0%
+   └ Source/Function/Generate.ts ───────────────── 2.1kb ── 93.0%
+
+  Target/Class/Resolve.js ──────────────────────── 1.2kb ─ 100.0%
+   └ Source/Class/Resolve.ts ───────────────────── 1.1kb ── 96.8%
+
+  Target/Class/Logger.js ───────────────────────── 628b ── 100.0%
+   └ Source/Class/Logger.ts ────────────────────── 606b ─── 96.5%
+
+  Target/Function/Create.js ────────────────────── 606b ── 100.0%
+   └ Source/Function/Create.ts ─────────────────── 584b ─── 96.4%
+
+  Target/Function/Resolve/Ts.js ────────────────── 605b ── 100.0%
+   └ Source/Function/Resolve/Ts.ts ─────────────── 583b ─── 96.4%
+
+  Target/Function/Resolve/Path.js ──────────────── 574b ── 100.0%
+   └ Source/Function/Resolve/Path.ts ───────────── 537b ─── 93.6%
+
+  Target/Function/Load.js ──────────────────────── 353b ── 100.0%
+   └ Source/Function/Load.ts ───────────────────── 331b ─── 93.8%
+
+  Target/Function/Compute.js ───────────────────── 348b ── 100.0%
+   └ Source/Function/Compute.ts ────────────────── 326b ─── 93.7%
+
+  Target/Function/Get.js ───────────────────────── 293b ── 100.0%
+   └ Source/Function/Get.ts ────────────────────── 271b ─── 92.5%
+
+  Target/Class/Error/TSConfigPropertyError.js ──── 169b ── 100.0%
+   └ Source/Class/Error/TSConfigPropertyError.ts ─ 147b ─── 87.0%
+
+  Target/Class/Error/InvaliadAlias.js ──────────── 139b ── 100.0%
+   └ Source/Class/Error/InvaliadAlias.ts ───────── 107b ─── 77.0%
+
+  Target/Class/Error/InvalidAliasError.js ──────── 139b ── 100.0%
+   └ Source/Class/Error/InvalidAliasError.ts ───── 107b ─── 77.0%
+
+  Target/Class/Error/File.js ───────────────────── 128b ── 100.0%
+   └ Source/Class/Error/File.ts ────────────────── 104b ─── 81.2%
+
+  Target/Function/Normalize.js ─────────────────── 127b ── 100.0%
+   └ Source/Function/Normalize.ts ──────────────── 105b ─── 82.7%
+
+  Target/Function/Apply.js ─────────────────────── 126b ── 100.0%
+   └ Source/Function/Apply.ts ──────────────────── 104b ─── 82.5%
+
+  Target/Class/Error/FileNotFound.js ────────────── 99b ── 100.0%
+   └ Source/Class/Error/FileNotFound.ts ─────────── 67b ─── 67.7%
+
+  Target/Class/Error/Step.js ────────────────────── 83b ── 100.0%
+   └ Source/Class/Error/Step.ts ─────────────────── 61b ─── 73.5%
+
+  Target/Variable/Extension.js ──────────────────── 70b ── 100.0%
+   └ Source/Variable/Extension.ts ───────────────── 48b ─── 68.6%
+
+  Target/Interface/Alias.js ──────────────────────── 0b ── 100.0%
+
+  Target/Interface/Change.js ─────────────────────── 0b ── 100.0%
+
+  Target/Interface/ProgramOptions.js ─────────────── 0b ── 100.0%
+
+  Target/Interface/ProgramPaths.js ───────────────── 0b ── 100.0%
+
+  Target/Interface/TSConfig.js ───────────────────── 0b ── 100.0%
+
+  Target/Interface/TSConfigCompilerOptions.js ────── 0b ── 100.0%
+
+  Target/Interface/TextChange.js ─────────────────── 0b ── 100.0%
+
+Source/Class/Error/File.ts(1,32): error TS2304: Cannot find name 'Step'.
+
+Source/Class/Error/File.ts(1,32): error TS4020: 'extends' clause of exported class 'FileError' has or is using private name 'Step'.
+Source/Class/Error/FileNotFound.ts(1,40): error TS2304: Cannot find name 'FileError'.
+Source/Class/Error/FileNotFound.ts(1,40): error TS4020: 'extends' clause of exported class 'FileNotFoundError' has or is using private name 'FileError'.
+Source/Class/Error/InvaliadAlias.ts(1,40): error TS2304: Cannot find name 'Step'.
+Source/Class/Error/InvaliadAlias.ts(1,40): error TS4020: 'extends' clause of exported class 'InvalidAliasError' has or is using private name 'Step'.
+Source/Class/Error/InvalidAliasError.ts(1,40): error TS2304: Cannot find name 'Step'.
+Source/Class/Error/InvalidAliasError.ts(1,40): error TS4020: 'extends' clause of exported class 'InvalidAliasError' has or is using private name 'Step'.
+Source/Function/Apply.ts(3,29): error TS2307: Cannot find module '~/types' or its corresponding type declarations.
+
+Source/Function/Compute.ts(3,28): error TS2307: Cannot find module '~/types' or its corresponding type declarations.
+
+Source/Function/Compute.ts(4,35): error TS2307: Cannot find module '~/utils/errors' or its corresponding type declarations.
+Source/Function/Compute.ts(18,15): error TS2532: Object is possibly 'undefined'.
+Source/Function/Compute.ts(27,32): error TS2304: Cannot find name 'computeAliases'.
+Source/Function/Generate.ts(4,35): error TS2307: Cannot find module '~/utils/errors' or its corresponding type declarations.
+Source/Function/Generate.ts(5,31): error TS2307: Cannot find module '~/utils/path' or its corresponding type declarations.
+Source/Function/Generate.ts(7,62): error TS2307: Cannot find module '~/types' or its corresponding type declarations.
+Source/Function/Generate.ts(147,21): error TS7006: Parameter 'aliasPath' implicitly has an 'any' type.
+Source/Function/Get.ts(4,31): error TS2307: Cannot find module '~/utils/path' or its corresponding type declarations.
+Source/Function/Load.ts(9,31): error TS2307: Cannot find module '~/types' or its corresponding type declarations.
+Source/Function/Load.ts(10,35): error TS2307: Cannot find module '~/utils/errors' or its corresponding type declarations.
+Source/Function/Load.ts(19,51): error TS2552: Cannot find name 'loadTSConfig'. Did you mean 'TSConfig'?
+
+Source/Function/Resolve/Ts.ts(1,32): error TS2307: Cannot find module '~/types' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(2,36): error TS2307: Cannot find module '~/constants' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(4,30): error TS2307: Cannot find module '~/steps/loadTSConfig' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(5,30): error TS2307: Cannot find module '~/steps/resolvePaths' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(6,32): error TS2307: Cannot find module '~/steps/computeAliases' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(7,35): error TS2307: Cannot find module '~/steps/getFilesToProcess' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(8,33): error TS2307: Cannot find module '~/steps/generateChanges' or its corresponding type declarations.
+Source/Function/Resolve/Ts.ts(9,30): error TS2307: Cannot find module '~/steps/applyChanges' or its corresponding type declarations.
+
