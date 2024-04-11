@@ -9,7 +9,7 @@ import { normalizePath } from "~/utils/path";
  * @param outPath The output directory.
  * @param extensions A list of extensions to match.
  */
-export function getFilesToProcess(outPath: string, extensions: string[]) {
+export default (outPath: string, extensions: string[]) => {
 	const normalizedOutPath = normalizePath(outPath);
 
 	let glob = "*";
@@ -20,4 +20,4 @@ export function getFilesToProcess(outPath: string, extensions: string[]) {
 		dot: true,
 		onlyFiles: true,
 	}).map((path) => resolve(path));
-}
+};

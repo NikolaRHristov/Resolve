@@ -7,13 +7,14 @@ import type { ProgramOptions, ProgramPaths, TSConfig } from "~/types";
 /**
  * Resolve paths provided to the program to absolute paths.
  */
-export function resolvePaths(
-	options: Pick<ProgramOptions, "out" | "project" | "src">,
+export default (
+	options: Partial<Pick<ProgramOptions, "out" | "project" | "src">>,
 	tsConfig: TSConfig
-): ProgramPaths {
+): ProgramPaths => {
 	const { baseUrl = "", outDir, paths } = tsConfig.options ?? {};
 
 	const out = options.out ?? outDir;
+	
 	if (!out) {
 		throw new Step(
 			resolvePaths.name,
@@ -34,4 +35,4 @@ export function resolvePaths(
 	const outPath = resolve(out);
 
 	return { basePath, configPath, configFile, srcPath, outPath };
-}
+};

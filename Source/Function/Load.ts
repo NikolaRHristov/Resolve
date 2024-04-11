@@ -14,7 +14,7 @@ import { FileNotFoundError } from "~/utils/errors";
  *
  * @param path The path to the tsconfig file.
  */
-export function loadTSConfig(path: string): TSConfig {
+export default (path: string): TSConfig => {
 	const configFileName = findConfigFile(process.cwd(), sys.fileExists, path);
 	if (!configFileName) throw new FileNotFoundError(loadTSConfig.name, path);
 	const configFile = readConfigFile(configFileName, sys.readFile);
@@ -25,4 +25,4 @@ export function loadTSConfig(path: string): TSConfig {
 		directory
 	);
 	return options;
-}
+};

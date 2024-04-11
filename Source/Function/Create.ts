@@ -1,22 +1,19 @@
 import { Command } from "commander";
 
-import { DEFAULT_EXTENSIONS } from "~/constants";
-import { version } from "~/version.json";
+import Extension from "@Variable/Extension.js";
 
 const example = `
-Example:
-$ @playform/resolve --project tsconfig.json --src ./src -out ./dist
+	Example:
+	$ Resolve --project tsconfig.json --src ./src -out ./dist
 `;
 
 /**
  * Create the CLI program.
  */
-export function createProgram() {
-	const program = new Command();
-
-	program
-		.version(version)
-		.name("@playform/resolve")
+export default () =>
+	new Command()
+		.version(process.env["VERSION_PACKAGE"] ?? "0.0.1")
+		.name("Resolve")
 		.addHelpText("after", example)
 		.option(
 			"-p, --project <path>",
@@ -28,10 +25,7 @@ export function createProgram() {
 		.option(
 			"--ext <extensions...>",
 			"space-delimited list of file extensions to process",
-			DEFAULT_EXTENSIONS as any
+			Extension
 		)
 		.option("--verbose", "output logs", false)
 		.option("--noEmit", "changes will not be emitted", false);
-
-	return program;
-}

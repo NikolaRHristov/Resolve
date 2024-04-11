@@ -34,11 +34,11 @@ const MODULE_EXTS = [
  * @param aliases The path mapping configuration from tsconfig.
  * @param programPaths Program options.
  */
-export function generateChanges(
+export default (
 	files: string[],
 	aliases: Alias[],
 	programPaths: Pick<ProgramPaths, "srcPath" | "outPath">
-): Change[] {
+): Change[] => {
 	const changeList: Change[] = [];
 
 	for (const file of files) {
@@ -54,7 +54,7 @@ export function generateChanges(
 	}
 
 	return changeList;
-}
+};
 
 /**
  * Read the file at the given path and return the text with aliased paths replaced.
@@ -94,6 +94,7 @@ export function replaceAliasPathsInFile(
 			if (!result.replacement) return original;
 
 			const index = original.lastIndexOf(importSpecifier);
+
 			changes.push({
 				original: normalizePath(result.original),
 				modified: normalizePath(result.replacement),
@@ -143,7 +144,7 @@ export function aliasToRelativePath(
 				aliasPaths.map((aliasPath) =>
 					resolve(aliasPath, importSpecifier.replace(prefix, ""))
 				)
-		  );
+			);
 
 	const absoluteImport = absoluteImportPaths.reduce<null | ReturnType<
 		typeof resolveImportPath
@@ -165,7 +166,7 @@ export function aliasToRelativePath(
 			? join(
 					relative(sourceFileDirectory, dirname(absoluteImportPath)),
 					basename(absoluteImportPath)
-			  )
+				)
 			: relative(sourceFileDirectory, absoluteImportPath);
 
 	const prefixedRelativePath = relativeImportPath.replace(

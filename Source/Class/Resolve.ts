@@ -2,29 +2,30 @@
 
 import { bold } from "ansi-colors";
 
-import type { ProgramOptions } from "~/types";
-import { Logger } from "~/utils/logger";
-import { Step } from "~/utils/errors";
+import type ProgramOptions from "@Interface/ProgramOptions.js";
+import Logger from "@Class/Logger.js";
+import Step from "@Class/Error/Step.js";
 
-import { createProgram } from "~/steps/createProgram";
-import { loadTSConfig } from "~/steps/loadTSConfig";
-import { resolvePaths } from "~/steps/resolvePaths";
-import { computeAliases } from "~/steps/computeAliases";
-import { getFilesToProcess } from "~/steps/getFilesToProcess";
-import { generateChanges } from "~/steps/generateChanges";
-import { applyChanges } from "~/steps/applyChanges";
+import Create from "@Function/Create.js";
+import Load from "@Function/Load.js";
+import Path from "@Function/Resolve/Path.js";
+import Compute from "@Function/Compute.js";
+import Get from "@Function/Get.js";
+import Generate from "@Function/Generate.js";
+import Apply from "@Function/Apply.js";
 
-function main() {
-	const program = createProgram();
-	const options = program.parse().opts<ProgramOptions>();
+export const main = () => {
+	const options = Create().parse().opts<ProgramOptions>();
 	const logger = new Logger(options.verbose ? "verbose" : "info");
 
 	logger.verbose();
 	logger.fancyParams("options", options);
 
 	try {
-		const tsConfig = loadTSConfig(options.project);
+		const tsConfig = Load(options.project);
+
 		const { rootDir, outDir, baseUrl, paths } = tsConfig.options ?? {};
+
 		logger.fancyParams("compilerOptions", {
 			rootDir,
 			outDir,
@@ -32,19 +33,23 @@ function main() {
 			paths,
 		});
 
-		const programPaths = resolvePaths(options, tsConfig);
+		const programPaths = Path(options, tsConfig);
+
 		logger.fancyParams("programPaths", programPaths);
 
-		const aliases = computeAliases(
+		const aliases = Compute(
 			programPaths.basePath,
 			tsConfig?.options?.paths ?? {}
 		);
+
 		logger.fancyParams("aliases", aliases);
 
-		const files = getFilesToProcess(programPaths.outPath, options.ext);
+		const files = Get(programPaths.outPath, options.ext);
+
 		logger.fancyParams("filesToProcess", files);
 
-		const changes = generateChanges(files, aliases, programPaths);
+		const changes = Generate(files, aliases, programPaths);
+
 		logger.fancyParams(
 			"fileChanges",
 			changes.map(({ file, changes }) => ({ file, changes }))
@@ -52,28 +57,26 @@ function main() {
 
 		if (options.noEmit) {
 			logger.info(
-				bold("@playform/resolve:"),
+				bold("Resolve:"),
 				"discovered",
 				changes.length,
 				"file(s) for change (none actually changed since --noEmit was given)"
 			);
 		} else {
-			applyChanges(changes);
-			logger.info(
-				bold("@playform/resolve:"),
-				"changed",
-				changes.length,
-				"file(s)"
-			);
+			Apply(changes);
+
+			logger.info(bold("Resolve:"), "changed", changes.length, "file(s)");
 		}
-	} catch (error: any) {
-		if (error instanceof Step) {
+	} catch (_Error) {
+		if (_Error instanceof Step) {
 			logger.fancyError(
-				`Error during step '${bold(error.step)}'`,
-				error.message
+				`Error during step '${bold(_Error.step)}'`,
+				_Error.message
 			);
-		} else throw error;
+		} else {
+			throw _Error;
+		}
 	}
-}
+};
 
 main();

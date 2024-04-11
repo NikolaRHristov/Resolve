@@ -1,4 +1,4 @@
-export interface ProgramOptions {
+export default interface ProgramOptions {
 	/**
 	 * Path to the project's tsconfig file. Defaults to "tsconfig.json"
 	 * if not provided.

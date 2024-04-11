@@ -6,10 +6,10 @@ import { InvalidAliasError } from "~/utils/errors";
 /**
  * Compute the alias paths provided by the tsconfig.
  */
-export function computeAliases(
+export default (
 	basePath: string,
 	paths: { [key: string]: string[] }
-): Alias[] {
+): Alias[] => {
 	const regex = /\*$/;
 
 	const aliases: Alias[] = Object.keys(paths).map((alias) => ({
@@ -28,4 +28,4 @@ export function computeAliases(
 	}
 
 	return aliases;
-}
+};
