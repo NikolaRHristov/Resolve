@@ -2,7 +2,7 @@
 	"name": "@playform/resolve",
 	"version": "0.0.1",
 	"private": false,
-	"description": "⛵ Resolve.",
+	"description": "⛵ Resolve",
 	"keywords": [
 		"typescript",
 		"tsc",
