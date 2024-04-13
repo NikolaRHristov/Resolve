@@ -29,7 +29,6 @@
 	"bin": {
 		"Resolve": "Target/Class/Resolve.js"
 	},
-	
 	"scripts": {
 		"Document": "Document 'Source/**/*.ts'",
 		"prepublishOnly": "Build 'Source/**/*.ts'"
