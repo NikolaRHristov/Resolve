@@ -1,4 +1,4 @@
-import { ProgramOptions } from "~/types";
+import type { ProgramOptions } from "~/types";
 export type ResolveTsPathOptions = Omit<Partial<ProgramOptions>, "verbose" | "noEmit">;
 /**
  * Convert Typescript path aliases to proper relative paths

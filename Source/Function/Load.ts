@@ -1,9 +1,9 @@
 import { dirname } from "path";
 import {
+	sys,
 	findConfigFile,
 	parseJsonConfigFileContent,
 	readConfigFile,
-	sys,
 } from "typescript";
 
 import type { TSConfig } from "~/types";

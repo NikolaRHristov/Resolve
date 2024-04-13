@@ -1,12 +1,12 @@
-import { ProgramOptions } from "~/types";
 import { DEFAULT_EXTENSIONS } from "~/constants";
+import type { ProgramOptions } from "~/types";
 
+import { applyChanges } from "~/steps/applyChanges";
+import { computeAliases } from "~/steps/computeAliases";
+import { generateChanges } from "~/steps/generateChanges";
+import { getFilesToProcess } from "~/steps/getFilesToProcess";
 import { loadTSConfig } from "~/steps/loadTSConfig";
 import { resolvePaths } from "~/steps/resolvePaths";
-import { computeAliases } from "~/steps/computeAliases";
-import { getFilesToProcess } from "~/steps/getFilesToProcess";
-import { generateChanges } from "~/steps/generateChanges";
-import { applyChanges } from "~/steps/applyChanges";
 
 export type ResolveTsPathOptions = Omit<
 	Partial<ProgramOptions>,

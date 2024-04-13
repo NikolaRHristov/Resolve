@@ -2,17 +2,17 @@
 
 import { bold } from "ansi-colors";
 
-import type ProgramOptions from "@Interface/ProgramOptions.js";
-import Logger from "@Class/Logger.js";
 import Step from "@Class/Error/Step.js";
+import Logger from "@Class/Logger.js";
+import type ProgramOptions from "@Interface/ProgramOptions.js";
 
+import Apply from "@Function/Apply.js";
+import Compute from "@Function/Compute.js";
 import Create from "@Function/Create.js";
+import Generate from "@Function/Generate.js";
+import Get from "@Function/Get.js";
 import Load from "@Function/Load.js";
 import Path from "@Function/Resolve/Path.js";
-import Compute from "@Function/Compute.js";
-import Get from "@Function/Get.js";
-import Generate from "@Function/Generate.js";
-import Apply from "@Function/Apply.js";
 
 export const main = () => {
 	const options = Create().parse().opts<ProgramOptions>();

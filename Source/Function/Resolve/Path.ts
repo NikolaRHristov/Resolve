@@ -1,4 +1,4 @@
-import { resolve, dirname } from "path";
+import { dirname, resolve } from "path";
 
 import Step from "@Class/Error/Step";
 import TSConfigPropertyError from "@Class/Error/TSConfigPropertyError.js";
