@@ -163,7 +163,7 @@ Use this flag to not emit any changes to your files. Recommended to be used with
 
 _This option is only available when using the CLI._
 
-[Resolver.]: https://npmjs.org/@playform/resolve
+[Resolver.]: HTTPS://npmjs.org/@playform/resolve
 
 ## Changelog
 
