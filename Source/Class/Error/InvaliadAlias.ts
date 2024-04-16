@@ -1,8 +1,11 @@
-export class InvalidAliasError extends Step {
-	constructor(
-		public readonly step: string,
-		public readonly alias: string
-	) {
-		super(step, `The alias ${alias} is not permitted`);
+export default class extends (await import("@Class/Error/Step.js")).default {
+	public override readonly Step: string;
+	public readonly Alias: string;
+
+	constructor(Step: string, Alias: string) {
+		super(Step, `The alias ${Alias} is not permitted`);
+
+		this.Step = Step;
+		this.Alias = Alias;
 	}
 }

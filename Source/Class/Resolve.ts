@@ -4,7 +4,7 @@ import { bold } from "ansi-colors";
 
 import Step from "@Class/Error/Step.js";
 import Logger from "@Class/Logger.js";
-import type ProgramOptions from "@Interface/ProgramOptions.js";
+import type Interface from "@Interface/ProgramOptions.js";
 
 import Apply from "@Function/Apply.js";
 import Compute from "@Function/Compute.js";
@@ -15,15 +15,15 @@ import Load from "@Function/Load.js";
 import Path from "@Function/Resolve/Path.js";
 
 export const main = () => {
-	const options = Create().parse().opts<ProgramOptions>();
+	const options = Create().parse().opts<Interface>();
 
-	const logger = new Logger(options.verbose ? "verbose" : "info");
+	const logger = new Logger(options.Verbose ? "verbose" : "info");
 
 	logger.verbose();
 	logger.fancyParams("options", options);
 
 	try {
-		const tsConfig = Load(options.project);
+		const tsConfig = Load(options.Project);
 
 		const { rootDir, outDir, baseUrl, paths } = tsConfig.options ?? {};
 
@@ -39,13 +39,13 @@ export const main = () => {
 		logger.fancyParams("programPaths", programPaths);
 
 		const aliases = Compute(
-			programPaths.basePath,
+			programPaths.Base,
 			tsConfig?.options?.paths ?? {}
 		);
 
 		logger.fancyParams("aliases", aliases);
 
-		const files = Get(programPaths.outPath, options.ext);
+		const files = Get(programPaths.Target, options.Extension);
 
 		logger.fancyParams("filesToProcess", files);
 
@@ -56,7 +56,7 @@ export const main = () => {
 			changes.map(({ file, changes }) => ({ file, changes }))
 		);
 
-		if (options.noEmit) {
+		if (options.NoEmit) {
 			logger.info(
 				bold("Resolve:"),
 				"discovered",
@@ -71,7 +71,7 @@ export const main = () => {
 	} catch (_Error) {
 		if (_Error instanceof Step) {
 			logger.fancyError(
-				`Error during step '${bold(_Error.step)}'`,
+				`Error during step '${bold(_Error.Step)}'`,
 				_Error.message
 			);
 		} else {

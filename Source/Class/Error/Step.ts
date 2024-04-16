@@ -1,8 +1,9 @@
 export default class extends Error {
-	constructor(
-		public readonly step: string,
-		message: string
-	) {
-		super(message);
+	public readonly Step: string;
+
+	constructor(Step: string, Message: string) {
+		super(Message);
+
+		this.Step = Step;
 	}
 }

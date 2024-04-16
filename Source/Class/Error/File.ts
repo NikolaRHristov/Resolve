@@ -1,9 +1,12 @@
-export class FileError extends Step {
-	constructor(
-		public readonly step: string,
-		public readonly path: string,
-		message: string
-	) {
-		super(step, `Error processing ${path}: ${message}`);
+export default class FileError extends (await import("@Class/Error/Step.js"))
+	.default {
+	public override readonly Step;
+	public readonly Path;
+
+	constructor(Step: string, Path: string, Message: string) {
+		super(Step, `Error processing ${Path}: ${Message}`);
+
+		this.Step = Step;
+		this.Path = Path;
 	}
 }

@@ -1,22 +1,22 @@
 import { bold, dim, green, red } from "ansi-colors";
 
-export type LoggerLevel = "verbose" | "info" | "error";
+export type Level = "verbose" | "info" | "error";
 
 export default class {
-	public readonly level;
+	public readonly Level;
 
-	constructor(level: LoggerLevel) {
-		this.level = level;
+	constructor(level: Level) {
+		this.Level = level;
 	}
 
 	verbose(...args: (string | undefined)[]) {
-		if (this.level === "verbose") {
+		if (this.Level === "verbose") {
 			console.log(...args);
 		}
 	}
 
 	info(...args: (string | number)[]) {
-		if (["verbose", "info"].includes(this.level)) {
+		if (["verbose", "info"].includes(this.Level)) {
 			console.log(...args);
 		}
 	}

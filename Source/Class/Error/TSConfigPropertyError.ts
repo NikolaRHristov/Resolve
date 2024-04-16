@@ -1,8 +1,11 @@
 export default class extends (await import("@Class/Error/Step.js")).default {
-	constructor(
-		public override readonly step: string,
-		public readonly property: string
-	) {
-		super(step, `${property} is not set in tsconfig`);
+	public override readonly Step: string;
+	public readonly Property: string;
+
+	constructor(Step: string, Property: string) {
+		super(Step, `${Property} is not set in tsconfig`);
+
+		this.Step = Step;
+		this.Property = Property;
 	}
 }
