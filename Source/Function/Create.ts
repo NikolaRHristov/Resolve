@@ -1,20 +1,20 @@
 import { Command } from "commander";
 
-import Extension from "@Variable/Extension.js";
-
-const example = `
-	Example:
-	$ Resolve --project tsconfig.json --src ./src -out ./dist
-`;
-
 /**
  * Create the CLI program.
+ *
  */
-export default () =>
+export default async () =>
 	new Command()
 		.version(process.env["VERSION_PACKAGE"] ?? "0.0.1")
 		.name("Resolve")
-		.addHelpText("after", example)
+		.addHelpText(
+			"after",
+			`
+	Example:
+	$ Resolve --project tsconfig.json --src ./src -out ./dist
+`
+		)
 		.option(
 			"-p, --project <path>",
 			"path to tsconfig file",
@@ -25,7 +25,7 @@ export default () =>
 		.option(
 			"--ext <extensions...>",
 			"space-delimited list of file extensions to process",
-			Extension
+			(await import("@Variable/Extension.js")).default
 		)
 		.option("--verbose", "output logs", false)
 		.option("--noEmit", "changes will not be emitted", false);

@@ -14,50 +14,50 @@ import Get from "@Function/Get.js";
 import Load from "@Function/Load.js";
 import Path from "@Function/Resolve/Path.js";
 
-export const main = () => {
-	const options = Create().parse().opts<Interface>();
+export const _Function = async () => {
+	const options = (await Create()).parse().opts<Interface>();
 
 	const logger = new Logger(options.Verbose ? "verbose" : "info");
 
-	logger.verbose();
-	logger.fancyParams("options", options);
+	logger.Verbose();
+	logger.Param("options", options);
 
 	try {
 		const tsConfig = Load(options.Project);
 
 		const { rootDir, outDir, baseUrl, paths } = tsConfig.options ?? {};
 
-		logger.fancyParams("compilerOptions", {
+		logger.Param("compilerOptions", {
 			rootDir,
 			outDir,
 			baseUrl,
 			paths,
 		});
 
-		const programPaths = Path(options, tsConfig);
+		const programPaths = await Path(options, tsConfig);
 
-		logger.fancyParams("programPaths", programPaths);
+		logger.Param("programPaths", programPaths);
 
 		const aliases = Compute(
 			programPaths.Base,
 			tsConfig?.options?.paths ?? {}
 		);
 
-		logger.fancyParams("aliases", aliases);
+		logger.Param("aliases", aliases);
 
 		const files = Get(programPaths.Target, options.Extension);
 
-		logger.fancyParams("filesToProcess", files);
+		logger.Param("filesToProcess", files);
 
 		const changes = Generate(files, aliases, programPaths);
 
-		logger.fancyParams(
+		logger.Param(
 			"fileChanges",
 			changes.map(({ file, changes }) => ({ file, changes }))
 		);
 
 		if (options.NoEmit) {
-			logger.info(
+			logger.Info(
 				bold("Resolve:"),
 				"discovered",
 				changes.length,
@@ -66,11 +66,11 @@ export const main = () => {
 		} else {
 			Apply(changes);
 
-			logger.info(bold("Resolve:"), "changed", changes.length, "file(s)");
+			logger.Info(bold("Resolve:"), "changed", changes.length, "file(s)");
 		}
 	} catch (_Error) {
 		if (_Error instanceof Step) {
-			logger.fancyError(
+			logger.Error(
 				`Error during step '${bold(_Error.Step)}'`,
 				_Error.message
 			);
@@ -80,4 +80,4 @@ export const main = () => {
 	}
 };
 
-main();
+await _Function();

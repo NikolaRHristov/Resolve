@@ -1,5 +1,3 @@
-import { bold, dim, green, red } from "ansi-colors";
-
 export type Level = "verbose" | "info" | "error";
 
 export default class {
@@ -9,33 +7,28 @@ export default class {
 		this.Level = level;
 	}
 
-	verbose(...args: (string | undefined)[]) {
+	Verbose(...args: (string | undefined)[]) {
 		if (this.Level === "verbose") {
 			console.log(...args);
 		}
 	}
 
-	info(...args: (string | number)[]) {
+	Info(...args: (string | number)[]) {
 		if (["verbose", "info"].includes(this.Level)) {
 			console.log(...args);
 		}
 	}
 
 	// biome-ignore lint/suspicious/noExplicitAny:
-	error(...args: any[]) {
-		console.error(...args.map((x) => red(x)));
-	}
-
-	// biome-ignore lint/suspicious/noExplicitAny:
-	fancyParams<T extends { [key: string]: any }>(title: string, params: T) {
-		this.verbose(bold(title));
+	Param<T extends { [key: string]: any }>(title: string, params: T) {
+		this.Verbose(bold(title));
 
 		const keys = Object.keys(params);
 
 		const isArray = Array.isArray(params);
 
 		if (keys.length === 0) {
-			this.verbose(dim("empty"));
+			this.Verbose(dim("empty"));
 		} else {
 			for (const key of keys) {
 				// biome-ignore lint/suspicious/noExplicitAny:
@@ -45,22 +38,20 @@ export default class {
 				}
 
 				if (isArray) {
-					this.verbose(value);
+					this.Verbose(value);
 				} else {
-					this.verbose(key, "->", value);
+					this.Verbose(key, "->", value);
 				}
 			}
 		}
-		this.verbose();
+		this.Verbose();
 	}
 
-	fancyError(title: string, message: string) {
-		console.error();
-
+	Error(title: string, message: string) {
 		console.error(red.bold(title));
 
 		console.error(message);
-
-		console.error();
 	}
 }
+
+export const { bold, dim, green, red } = (await import("ansi-colors")).default;

@@ -1,14 +1,13 @@
-import { writeFileSync } from "fs";
-
-import type { Change } from "~/types";
-
 /**
  * Apply the file changes.
  *
  * @param changes The file changes to apply.
  */
-export default (changes: Change[]) => {
-	changes.forEach(({ file, text }) => {
-		writeFileSync(file, text, { encoding: "utf-8" });
-	});
-};
+export default (Change: Change[]) =>
+	Change.forEach(async ({ File, Text }) =>
+		(await import("fs/promises")).writeFile(File, Text, {
+			encoding: "utf-8",
+		})
+	);
+
+import type Change from "@Interface/Change.js";
