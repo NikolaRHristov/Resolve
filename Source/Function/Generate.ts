@@ -40,7 +40,7 @@ const MODULE_EXTS = [
 export default (
 	files: string[],
 	aliases: Alias[],
-	programPaths: Pick<ProgramPaths, "srcPath" | "outPath">
+	programPaths: Pick<ProgramPaths, "Source" | "Target">
 ): Change[] => {
 	const changeList: Change[] = [];
 
@@ -51,7 +51,9 @@ export default (
 			programPaths
 		);
 
-		if (!changed) continue;
+		if (!changed) {
+			continue;
+		}
 
 		changeList.push({ file, text, changes });
 	}
@@ -69,7 +71,7 @@ export default (
 export function replaceAliasPathsInFile(
 	filePath: string,
 	aliases: Alias[],
-	programPaths: Pick<ProgramPaths, "srcPath" | "outPath">
+	programPaths: Pick<ProgramPaths, "Source" | "Target">
 ): { changed: boolean; text: string; changes: TextChange[] } {
 	if (!existsSync(filePath)) {
 		throw new FileNotFoundError(replaceAliasPathsInFile.name, filePath);
@@ -131,10 +133,10 @@ export function aliasToRelativePath(
 	importSpecifier: string,
 	outputFile: string,
 	aliases: Alias[],
-	{  Source, outPath }: Pick<ProgramPaths, "srcPath" | "outPath">,
+	{ Source, Target }: Pick<ProgramPaths, "Source" | "Target">,
 	esModule?: boolean
 ): { file: string; original: string; replacement?: string } {
-	const sourceFile = resolve(Source, relative(outPath, outputFile));
+	const sourceFile = resolve(Source, relative(Target, outputFile));
 
 	const sourceFileDirectory = dirname(sourceFile);
 
@@ -143,15 +145,15 @@ export function aliasToRelativePath(
 	const importPathIsRelative =
 		importSpecifier.startsWith("./") || importSpecifier.startsWith("../");
 
-	const matchingAliases = aliases.filter(({ prefix }) =>
-		importSpecifier.startsWith(prefix)
+	const matchingAliases = aliases.filter(({ Prefix }) =>
+		importSpecifier.startsWith(Prefix)
 	);
 
 	const absoluteImportPaths = importPathIsRelative
 		? [resolve(sourceFileDirectory, importSpecifier)]
-		: matchingAliases.flatMap(({ prefix, aliasPaths }) =>
-				aliasPaths.map((aliasPath) =>
-					resolve(aliasPath, importSpecifier.replace(prefix, ""))
+		: matchingAliases.flatMap(({ Prefix, Path }) =>
+				Path.map((aliasPath) =>
+					resolve(aliasPath, importSpecifier.replace(Prefix, ""))
 				)
 			);
 
@@ -180,7 +182,7 @@ export function aliasToRelativePath(
 
 	const prefixedRelativePath = relativeImportPath.replace(
 		/^(?!\.+\/)/,
-		(m) => "./" + m
+		(m) => `./${m}`
 	);
 
 	const relativePathJsExtension = prefixedRelativePath.replace(
