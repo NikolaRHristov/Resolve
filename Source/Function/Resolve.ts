@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 export const _Function = async () => {
-	const options = (await Create()).parse().opts<Interface>();
+	const options = (await (await import('@Function/Cre'))()).parse().opts<Interface>();
 
-	const logger = new Logger(options.Verbose ? "verbose" : "info");
+	const logger = new (await import("@Class/Logger.js")).default(
+		options.Verbose ? "verbose" : "info"
+	);
 
 	logger.Verbose();
 	logger.Param("options", options);
@@ -24,10 +26,9 @@ export const _Function = async () => {
 
 		logger.Param("programPaths", programPaths);
 
-		const aliases = await Compute(
-			programPaths.Base,
-			tsConfig?.options?.paths ?? {}
-		);
+		const aliases = await (
+			await import("@Function/Compute.js")
+		).default(programPaths.Base, tsConfig?.options?.paths ?? {});
 
 		logger.Param("aliases", aliases);
 
@@ -50,12 +51,12 @@ export const _Function = async () => {
 				"file(s) for change (none actually changed since --noEmit was given)"
 			);
 		} else {
-			Apply(changes);
+			(await import("@Function/Apply.js")).default(changes);
 
 			logger.Info(bold("Resolve:"), "changed", changes.length, "file(s)");
 		}
 	} catch (_Error) {
-		if (_Error instanceof Step) {
+		if (_Error instanceof (await import("@Class/Error/Step.js")).default) {
 			logger.Error(
 				`Error during step '${bold(_Error.Step)}'`,
 				_Error.message
@@ -72,11 +73,6 @@ import type Interface from "@Interface/ProgramOptions.js";
 
 import { bold } from "ansi-colors";
 
-import Step from "@Class/Error/Step.js";
-import Logger from "@Class/Logger.js";
-
-import Apply from "@Function/Apply.js";
-import Compute from "@Function/Compute.js";
 import Create from "@Function/Create.js";
 import Generate from "@Function/Generate.js";
 import Get from "@Function/Get.js";
