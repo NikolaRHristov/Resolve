@@ -1,26 +1,19 @@
-import { dirname } from "path";
-import {
-	sys,
-	findConfigFile,
-	parseJsonConfigFileContent,
-	readConfigFile,
-} from "typescript";
-
-import type { TSConfig } from "~/types";
-import { FileNotFoundError } from "~/utils/errors";
-
 /**
  * Load the tsconfig file using Typescript's built-in config file loader.
  *
  * @param path The path to the tsconfig file.
+ *
  */
-export default (path: string): TSConfig => {
-	const configFileName = findConfigFile(process.cwd(), sys.fileExists, path);
-	if (!configFileName) throw new FileNotFoundError(loadTSConfig.name, path);
+export const _Function = (path: string): TSConfig => {
+	const NameConfig = findConfigFile(process.cwd(), sys.fileExists, path);
 
-	const configFile = readConfigFile(configFileName, sys.readFile);
+	if (!NameConfig) {
+		throw new FileNotFoundError(_Function.name, path);
+	}
 
-	const directory = dirname(configFileName);
+	const configFile = readConfigFile(NameConfig, sys.readFile);
+
+	const directory = dirname(NameConfig);
 
 	const options = parseJsonConfigFileContent(
 		configFile.config,
@@ -29,3 +22,16 @@ export default (path: string): TSConfig => {
 	);
 	return options;
 };
+
+export default _Function;
+
+import { dirname } from "path";
+import {
+	sys,
+	findConfigFile,
+	parseJsonConfigFileContent,
+	readConfigFile,
+} from "typescript";
+
+import type TSConfig from "@Interface/TSConfig";
+import FileNotFoundError from "@Class/Error/FileNotFound";
