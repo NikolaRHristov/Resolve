@@ -4,7 +4,10 @@ import { basename, dirname, join, relative, resolve } from "path";
 import { FileNotFoundError } from "~/utils/errors";
 import { normalizePath } from "~/utils/path";
 
-import type { Alias, Change, ProgramPaths, TextChange } from "~/types";
+import type Alias from "@Interface/Alias.js";
+import type Change from "@Interface/Change.js";
+import type ProgramPaths from "@Interface/ProgramPaths.js";
+import type TextChange from "@Interface/TextChange.js";
 
 export const IMPORT_EXPORT_REGEX =
 	/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g;
@@ -68,8 +71,9 @@ export function replaceAliasPathsInFile(
 	aliases: Alias[],
 	programPaths: Pick<ProgramPaths, "srcPath" | "outPath">
 ): { changed: boolean; text: string; changes: TextChange[] } {
-	if (!existsSync(filePath))
+	if (!existsSync(filePath)) {
 		throw new FileNotFoundError(replaceAliasPathsInFile.name, filePath);
+	}
 
 	const originalText = readFileSync(filePath, "utf-8");
 
@@ -92,13 +96,15 @@ export function replaceAliasPathsInFile(
 				esmImport
 			);
 
-			if (!result.replacement) return original;
+			if (!result.replacement) {
+				return original;
+			}
 
 			const index = original.lastIndexOf(importSpecifier);
 
 			changes.push({
-				original: normalizePath(result.original),
-				modified: normalizePath(result.replacement),
+				Original: normalizePath(result.original),
+				Modify: normalizePath(result.replacement),
 			});
 
 			return (
@@ -125,10 +131,10 @@ export function aliasToRelativePath(
 	importSpecifier: string,
 	outputFile: string,
 	aliases: Alias[],
-	{ srcPath, outPath }: Pick<ProgramPaths, "srcPath" | "outPath">,
+	{  Source, outPath }: Pick<ProgramPaths, "srcPath" | "outPath">,
 	esModule?: boolean
 ): { file: string; original: string; replacement?: string } {
-	const sourceFile = resolve(srcPath, relative(outPath, outputFile));
+	const sourceFile = resolve(Source, relative(outPath, outputFile));
 
 	const sourceFileDirectory = dirname(sourceFile);
 
