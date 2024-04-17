@@ -1,12 +1,12 @@
-import { DEFAULT_EXTENSIONS } from "~/constants";
-import type { ProgramOptions } from "~/types";
+import DEFAULT_EXTENSIONS from "@Variable/Extension";
+import type ProgramOptions from "@Interface/ProgramOptions";
 
-import { applyChanges } from "~/steps/applyChanges";
-import { computeAliases } from "~/steps/computeAliases";
-import { generateChanges } from "~/steps/generateChanges";
-import { getFilesToProcess } from "~/steps/getFilesToProcess";
-import { loadTSConfig } from "~/steps/loadTSConfig";
-import { resolvePaths } from "~/steps/resolvePaths";
+export const { default: applyChanges } = await import("@Function/Apply");
+export const { default: computeAliases } = await import("@Function/Compute");
+export const { default: generateChanges } = await import("@Function/Generate");
+export const { default: getFilesToProcess } = await import("@Function/Get");
+export const { default: loadTSConfig } = await import("@Function/Load");
+export const { default: resolvePaths } = await import("@Function/Resolve");
 
 export type ResolveTsPathOptions = Omit<
 	Partial<ProgramOptions>,
@@ -19,22 +19,25 @@ export type ResolveTsPathOptions = Omit<
  */
 export default (options: ResolveTsPathOptions = {}): void => {
 	const {
-		project = "tsconfig.json",
-		src = "src",
-		ext = DEFAULT_EXTENSIONS,
+		Project = "tsconfig.json",
+		Source = "Source",
+		Extension = DEFAULT_EXTENSIONS,
 		out,
 	} = options;
 
-	const tsConfig = loadTSConfig(project);
+	const tsConfig = loadTSConfig(Project);
 
-	const programPaths = resolvePaths({ project, src, out }, tsConfig);
+	const programPaths = resolvePaths(
+		{ project: Project, src: Source, out },
+		tsConfig
+	);
 
 	const aliases = computeAliases(
 		programPaths.basePath,
 		tsConfig?.options?.paths ?? {}
 	);
 
-	const files = getFilesToProcess(programPaths.outPath, ext);
+	const files = getFilesToProcess(programPaths.outPath, Extension);
 
 	const changes = generateChanges(files, aliases, programPaths);
 	applyChanges(changes);
