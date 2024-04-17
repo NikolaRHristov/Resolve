@@ -1,24 +1,31 @@
-import { resolve } from "path";
-import { sync } from "fast-glob";
-
-import { normalizePath } from "~/utils/path";
-
 /**
  * Get the files in the output directory that should be processed.
  *
- * @param outPath The output directory.
- * @param extensions A list of extensions to match.
+ * @param Target The output directory.
+ * @param Extension A list of extensions to match.
  */
-export default (outPath: string, extensions: string[]) => {
-	const normalizedOutPath = normalizePath(outPath);
+export default async (Target: string, Extension: string[]) => {
+	let Search = "*";
 
-	let glob = "*";
+	if (Extension.length === 1) {
+		Search = `*.${Extension[0]}`;
+	} else if (Extension.length > 1) {
+		Search = `*.{${Extension.join(",")}}`;
+	}
 
-	if (extensions.length === 1) glob = `*.${extensions[0]}`;
-	else if (extensions.length > 1) glob = `*.{${extensions.join(",")}}`;
-
-	return sync(`${normalizedOutPath}/**/${glob}`, {
-		dot: true,
-		onlyFiles: true,
-	}).map((path) => resolve(path));
+	return await Promise.all(
+		(
+			await (
+				await import("fast-glob")
+			).default(
+				`${(await import("@Function/Normalize")).default(
+					Target
+				)}/**/${Search}`,
+				{
+					dot: true,
+					onlyFiles: true,
+				}
+			)
+		).map(async (Path) => (await import("path")).resolve(Path))
+	);
 };

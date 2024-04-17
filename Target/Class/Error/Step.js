@@ -1,1 +1,1 @@
-class e extends Error{constructor(t,r){super(r);this.step=t}}export{e as default};
+class s extends Error{Step;constructor(r,t){super(t),this.Step=r}}export{s as default};

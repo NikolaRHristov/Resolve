@@ -1,17 +1,6 @@
 import DEFAULT_EXTENSIONS from "@Variable/Extension";
 import type ProgramOptions from "@Interface/ProgramOptions";
 
-export const { default: applyChanges } = await import("@Function/Apply.js");
-export const { default: computeAliases } = await import("@Function/Compute.js");
-export const { default: generateChanges } = await import(
-	"@Function/Generate.js"
-);
-export const { default: getFilesToProcess } = await import("@Function/Get.js");
-export const { default: loadTSConfig } = await import("@Function/Load.js");
-export const { default: resolvePaths } = await import(
-	"@Function/Resolve/Path.js"
-);
-
 export type ResolveTsPathOptions = Omit<
 	Partial<ProgramOptions>,
 	"verbose" | "noEmit"
@@ -30,14 +19,21 @@ export default async (Option: ResolveTsPathOptions = {}): Promise<void> => {
 		Target,
 	} = Option;
 
-	const Config = loadTSConfig(Project);
+	const Config = (await import("@Function/Load.js")).default(Project);
 
-	const Path = await resolvePaths({ Project, Source, Target }, Config);
+	const Path = await (
+		await import("@Function/Resolve/Path.js")
+	).default({ Project, Source, Target }, Config);
 
-	const changes = generateChanges(
-		getFilesToProcess(Path.outPath, Extension),
-		computeAliases(Path.basePath, Config?.options?.paths ?? {}),
+	const changes = (await import("@Function/Generate.js")).default(
+		await (
+			await import("@Function/Get.js")
+		).default(Path.Target, Extension),
+		await (
+			await import("@Function/Compute.js")
+		).default(Path.Base, Config?.options?.paths ?? {}),
 		Path
 	);
-	applyChanges(changes);
+
+	(await import("@Function/Apply.js")).default(changes);
 };

@@ -1,8 +1,8 @@
-export interface Alias {
+export default interface Interface {
     /** The original path alias. */
-    alias: string;
+    Alias: string;
     /** The alias prefix that has been matched. */
-    prefix: string;
+    Prefix: string;
     /** The paths that the alias points to. */
-    aliasPaths: string[];
+    Path: string[];
 }

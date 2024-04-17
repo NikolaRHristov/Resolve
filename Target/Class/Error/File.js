@@ -1,1 +1,1 @@
-class t extends Step{constructor(r,s,e){super(r,`Error processing ${s}: ${e}`);this.step=r;this.path=s}}export{t as FileError};
+class i extends(await import("../Error/Step.js")).default{Step;Path;constructor(r,t,e){super(r,`Error processing ${t}: ${e}`),this.Step=r,this.Path=t}}export{i as default};

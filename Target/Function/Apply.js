@@ -1,1 +1,1 @@
-import{writeFileSync as r}from"fs";var i=e=>{e.forEach(({file:t,text:o})=>{r(t,o,{encoding:"utf-8"})})};export{i as default};
+var n=e=>e.forEach(async({File:a,Text:t})=>(await import("fs/promises")).writeFile(a,t,{encoding:"utf-8"}));export{n as default};

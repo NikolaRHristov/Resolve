@@ -1,6 +1,6 @@
-export interface TextChange {
+export default interface Interface {
     /** The original text. */
-    original: string;
+    Original: string;
     /** The modified text. */
-    modified: string;
+    Modify: string;
 }

@@ -1,8 +1,8 @@
-import type { Change } from "~/types";
 /**
  * Apply the file changes.
  *
  * @param changes The file changes to apply.
  */
-declare const _default: (changes: Change[]) => void;
+declare const _default: (Change: Change[]) => void;
 export default _default;
+import type Change from "@Interface/Change.js";

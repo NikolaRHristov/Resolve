@@ -1,1 +1,1 @@
-class i extends(await import("../Error/Step.js")).default{constructor(t,e){super(t,`${e} is not set in tsconfig`);this.step=t;this.property=e}}export{i as default};
+class i extends(await import("../Error/Step.js")).default{Step;Property;constructor(t,r){super(t,`${r} is not set in tsconfig`),this.Step=t,this.Property=r}}export{i as default};

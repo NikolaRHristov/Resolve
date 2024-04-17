@@ -1,8 +1,10 @@
-import type { Alias } from "~/types";
 /**
  * Compute the alias paths provided by the tsconfig.
+ *
  */
-declare const _default: (basePath: string, paths: {
+export declare const _Function: (Base: string, Path: {
     [key: string]: string[];
-}) => Alias[];
-export default _default;
+}) => Promise<Alias[]>;
+import type Alias from "@Interface/Alias.js";
+export declare const Regex: RegExp;
+export default _Function;

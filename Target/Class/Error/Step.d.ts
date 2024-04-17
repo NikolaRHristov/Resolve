@@ -1,4 +1,4 @@
 export default class extends Error {
-    readonly step: string;
-    constructor(step: string, message: string);
+    readonly Step: string;
+    constructor(Step: string, Message: string);
 }

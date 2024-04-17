@@ -12,14 +12,14 @@ export default interface Interface {
 	 * default to "src".
 	 *
 	 */
-	Source?: string;
+	Source?: string | undefined;
 
 	/**
 	 * Path to the output directory. Defaults to `compilerOptions.outDir`
 	 * from tsconfig if not provided.
 	 *
 	 */
-	Target?: string;
+	Target?: string | undefined;
 
 	/**
 	 * A list of file extensions that will be matched for replacement.

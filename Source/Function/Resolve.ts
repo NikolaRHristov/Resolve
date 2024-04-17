@@ -1,19 +1,5 @@
 #!/usr/bin/env node
 
-import { bold } from "ansi-colors";
-
-import Step from "@Class/Error/Step.js";
-import Logger from "@Class/Logger.js";
-import type Interface from "@Interface/ProgramOptions.js";
-
-import Apply from "@Function/Apply.js";
-import Compute from "@Function/Compute.js";
-import Create from "@Function/Create.js";
-import Generate from "@Function/Generate.js";
-import Get from "@Function/Get.js";
-import Load from "@Function/Load.js";
-import Path from "@Function/Resolve/Path.js";
-
 export const _Function = async () => {
 	const options = (await Create()).parse().opts<Interface>();
 
@@ -38,14 +24,14 @@ export const _Function = async () => {
 
 		logger.Param("programPaths", programPaths);
 
-		const aliases = Compute(
+		const aliases = await Compute(
 			programPaths.Base,
 			tsConfig?.options?.paths ?? {}
 		);
 
 		logger.Param("aliases", aliases);
 
-		const files = Get(programPaths.Target, options.Extension);
+		const files = await Get(programPaths.Target, options.Extension);
 
 		logger.Param("filesToProcess", files);
 
@@ -81,3 +67,18 @@ export const _Function = async () => {
 };
 
 await _Function();
+
+import type Interface from "@Interface/ProgramOptions.js";
+
+import { bold } from "ansi-colors";
+
+import Step from "@Class/Error/Step.js";
+import Logger from "@Class/Logger.js";
+
+import Apply from "@Function/Apply.js";
+import Compute from "@Function/Compute.js";
+import Create from "@Function/Create.js";
+import Generate from "@Function/Generate.js";
+import Get from "@Function/Get.js";
+import Load from "@Function/Load.js";
+import Path from "@Function/Resolve/Path.js";
