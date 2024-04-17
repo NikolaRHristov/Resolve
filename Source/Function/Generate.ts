@@ -23,6 +23,7 @@ export default (
 			return;
 		}
 
+		
 		changeList.push({ File, Text, Change });
 	});
 
@@ -32,37 +33,37 @@ export default (
 /**
  * Read the file at the given path and return the text with aliased paths replaced.
  *
- * @param File The path to the file.
- * @param Alias The path mapping configuration from tsconfig.
- * @param Path Program options.
+ * @param filePath The path to the file.
+ * @param aliases The path mapping configuration from tsconfig.
+ * @param programPaths Program options.
  */
 export function replaceAliasPathsInFile(
-	File: string,
-	Alias: Alias[],
-	Path: Pick<ProgramPaths, "Source" | "Target">
+	filePath: string,
+	aliases: Alias[],
+	programPaths: Pick<ProgramPaths, "Source" | "Target">
 ): { changed: boolean; text: string; changes: TextChange[] } {
-	if (!existsSync(File)) {
-		throw new FileNotFound(replaceAliasPathsInFile.name, File);
+	if (!existsSync(filePath)) {
+		throw new FileNotFound(replaceAliasPathsInFile.name, filePath);
 	}
 
-	const Original = readFileSync(File, "utf-8");
+	const originalText = readFileSync(filePath, "utf-8");
 
-	const Change: TextChange[] = [];
+	const changes: TextChange[] = [];
 
-	const newText = Original.replace(
+	const newText = originalText.replace(
 		IMPORT_EXPORT_REGEX,
 		(original, importStatement: string, importSpecifier: string) => {
 			// The import is an esm import if it is inside a typescript (definition) file or if it uses `import` or `export`
 			const esmImport =
-				!File.endsWith(".ts") &&
+				!filePath.endsWith(".ts") &&
 				(importStatement.includes("import") ||
 					importStatement.includes("export"));
 
 			const result = aliasToRelativePath(
 				importSpecifier,
-				File,
-				Alias,
-				Path,
+				filePath,
+				aliases,
+				programPaths,
 				esmImport
 			);
 
@@ -72,7 +73,7 @@ export function replaceAliasPathsInFile(
 
 			const index = original.lastIndexOf(importSpecifier);
 
-			Change.push({
+			changes.push({
 				Original: Normalize(result.original),
 				Modify: Normalize(result.replacement),
 			});
@@ -85,7 +86,7 @@ export function replaceAliasPathsInFile(
 		}
 	);
 
-	return { changed: Original !== newText, text: newText, changes: Change };
+	return { changed: originalText !== newText, text: newText, changes };
 }
 
 /**
