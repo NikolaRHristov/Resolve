@@ -4,55 +4,71 @@
  * @param filePath The path to the file.
  * @param aliases The path mapping configuration from tsconfig.
  * @param programPaths Program options.
+ *
  */
-export default (
+export const _Function = async (
 	filePath: string,
-	aliases: Alias[],
-	programPaths: Pick<ProgramPaths, "Source" | "Target">
-): { changed: boolean; text: string; changes: TextChange[] } => {
-	if (!existsSync(filePath)) {
-		throw new FileNotFound(replaceAliasPathsInFile.name, filePath);
+	Alias: Alias[],
+	Path: Pick<ProgramPaths, "Source" | "Target">
+): Promise<{ Changed: boolean; Text: string; Change: TextChange[] }> => {
+	try {
+		await (
+			await import("fs/promises")
+		).access(filePath, (await import("fs/promises")).constants.F_OK);
+	} catch (error) {
+		throw new FileNotFound(_Function.name, filePath);
 	}
 
-	const originalText = readFileSync(filePath, "utf-8");
+	const Text = readFileSync(filePath, "utf-8");
 
-	const changes: TextChange[] = [];
+	const Change: TextChange[] = [];
 
-	const newText = originalText.replace(
-		IMPORT_EXPORT_REGEX,
-		(original, importStatement: string, importSpecifier: string) => {
+	const newText = Text.replace(
+		/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g,
+		async (Text: string, Statement: string, Specifier: string) => {
 			// The import is an esm import if it is inside a typescript (definition) file or if it uses `import` or `export`
-			const esmImport =
-				!filePath.endsWith(".ts") &&
-				(importStatement.includes("import") ||
-					importStatement.includes("export"));
-
-			const result = aliasToRelativePath(
-				importSpecifier,
+			const { Original, Replace } = await (
+				await import("@Function/Convert")
+			).default(
+				Specifier,
 				filePath,
-				aliases,
-				programPaths,
-				esmImport
+				Alias,
+				Path,
+				!filePath.endsWith(".ts") &&
+					(Statement.includes("import") ||
+						Statement.includes("export"))
 			);
 
-			if (!result.replacement) {
-				return original;
+			if (!Result.Replace) {
+				return Text;
 			}
 
-			const index = original.lastIndexOf(importSpecifier);
+			const Index = Text.lastIndexOf(Specifier);
 
-			changes.push({
-				Original: Normalize(result.original),
-				Modify: Normalize(result.replacement),
+			Change.push({
+				Original: Normalize(Result.Original),
+				Modify: Normalize(Result.Replace),
 			});
 
 			return (
-				original.substring(0, index) +
-				result.replacement +
-				original.substring(index + importSpecifier.length)
+				Text.substring(0, Index) +
+				Result.Replace +
+				Text.substring(Index + Specifier.length)
 			);
 		}
 	);
 
-	return { changed: originalText !== newText, text: newText, changes };
+	return {
+		Changed: Text !== newText,
+		Text: newText,
+		Change: Change,
+	};
 };
+
+export default _Function;
+
+export const { default: Normalize } = await import("@Function/Normalize");
+
+import type Alias from "@Interface/Alias";
+import type ProgramPaths from "@Interface/ProgramPaths";
+import type TextChange from "@Interface/TextChange";
