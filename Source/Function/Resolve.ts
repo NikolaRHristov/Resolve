@@ -1,50 +1,63 @@
 #!/usr/bin/env node
 
 export const _Function = async () => {
-	const options = (await (await import('@Function/Cre'))()).parse().opts<Interface>();
+	const Option = (await (await import("@Function/Create.js")).default())
+		.parse()
+		.opts<Interface>();
 
-	const logger = new (await import("@Class/Logger.js")).default(
-		options.Verbose ? "verbose" : "info"
+	const Logger = new (await import("@Class/Logger.js")).default(
+		Option.Verbose ? "verbose" : "info"
 	);
 
-	logger.Verbose();
-	logger.Param("options", options);
+	Logger.Verbose();
+
+	Logger.Param("options", Option);
 
 	try {
-		const tsConfig = Load(options.Project);
+		const tsConfig = (await import("@Function/Load.js")).default(
+			Option.Project
+		);
 
 		const { rootDir, outDir, baseUrl, paths } = tsConfig.options ?? {};
 
-		logger.Param("compilerOptions", {
+		Logger.Param("compilerOptions", {
 			rootDir,
 			outDir,
 			baseUrl,
 			paths,
 		});
 
-		const programPaths = await Path(options, tsConfig);
+		const programPaths = await (
+			await import("@Function/Resolve/Path.js")
+		).default(Option, tsConfig);
 
-		logger.Param("programPaths", programPaths);
+		Logger.Param("programPaths", programPaths);
 
 		const aliases = await (
 			await import("@Function/Compute.js")
 		).default(programPaths.Base, tsConfig?.options?.paths ?? {});
 
-		logger.Param("aliases", aliases);
+		Logger.Param("aliases", aliases);
 
-		const files = await Get(programPaths.Target, options.Extension);
+		const files = await (
+			await import("@Function/Get.js")
+		).default(programPaths.Target, Option.Extension);
 
-		logger.Param("filesToProcess", files);
+		Logger.Param("filesToProcess", files);
 
-		const changes = Generate(files, aliases, programPaths);
+		const changes = (await import("@Function/Generate.js")).default(
+			files,
+			aliases,
+			programPaths
+		);
 
-		logger.Param(
+		Logger.Param(
 			"fileChanges",
 			changes.map(({ File, Change }) => ({ file: File, changes: Change }))
 		);
 
-		if (options.NoEmit) {
-			logger.Info(
+		if (Option.NoEmit) {
+			Logger.Info(
 				bold("Resolve:"),
 				"discovered",
 				changes.length,
@@ -53,11 +66,11 @@ export const _Function = async () => {
 		} else {
 			(await import("@Function/Apply.js")).default(changes);
 
-			logger.Info(bold("Resolve:"), "changed", changes.length, "file(s)");
+			Logger.Info(bold("Resolve:"), "changed", changes.length, "file(s)");
 		}
 	} catch (_Error) {
 		if (_Error instanceof (await import("@Class/Error/Step.js")).default) {
-			logger.Error(
+			Logger.Error(
 				`Error during step '${bold(_Error.Step)}'`,
 				_Error.message
 			);
@@ -71,10 +84,4 @@ await _Function();
 
 import type Interface from "@Interface/ProgramOptions.js";
 
-import { bold } from "ansi-colors";
-
-import Create from "@Function/Create.js";
-import Generate from "@Function/Generate.js";
-import Get from "@Function/Get.js";
-import Load from "@Function/Load.js";
-import Path from "@Function/Resolve/Path.js";
+export const { bold } = await import("ansi-colors");
