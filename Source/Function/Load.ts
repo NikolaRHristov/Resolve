@@ -11,12 +11,10 @@ export const _Function = (path: string): TSConfig => {
 		throw new FileNotFoundError(_Function.name, path);
 	}
 
-	const configFile = readConfigFile(NameConfig, sys.readFile);
-
 	const directory = dirname(NameConfig);
 
 	const options = parseJsonConfigFileContent(
-		configFile.config,
+		readConfigFile(NameConfig, sys.readFile).config,
 		sys,
 		directory
 	);
