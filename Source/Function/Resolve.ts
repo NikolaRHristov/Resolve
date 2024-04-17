@@ -27,28 +27,28 @@ export const _Function = async () => {
 			paths,
 		});
 
-		const programPaths = await (
+		const Path = await (
 			await import("@Function/Resolve/Path.js")
 		).default(Option, tsConfig);
 
-		Logger.Param("programPaths", programPaths);
+		Logger.Param("Path", Path);
 
-		const aliases = await (
+		const Alias = await (
 			await import("@Function/Compute.js")
-		).default(programPaths.Base, tsConfig?.options?.paths ?? {});
+		).default(Path.Base, tsConfig?.options?.paths ?? {});
 
-		Logger.Param("aliases", aliases);
+		Logger.Param("Alias", Alias);
 
-		const files = await (
+		const File = await (
 			await import("@Function/Get.js")
-		).default(programPaths.Target, Option.Extension);
+		).default(Path.Target, Option.Extension);
 
-		Logger.Param("filesToProcess", files);
+		Logger.Param("filesToProcess", File);
 
 		const changes = (await import("@Function/Generate.js")).default(
-			files,
-			aliases,
-			programPaths
+			File,
+			Alias,
+			Path
 		);
 
 		Logger.Param(
