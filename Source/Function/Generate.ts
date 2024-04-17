@@ -1,9 +1,10 @@
 /**
  * Generate the alias path mapping changes to apply to the provide files.
  *
- * @param files The list of files to replace alias paths in.
+ * @param File The list of files to replace alias paths in.
  * @param aliases The path mapping configuration from tsconfig.
  * @param programPaths Program options.
+ *
  */
 export default (
 	File: string[],
@@ -12,81 +13,22 @@ export default (
 ): Change[] => {
 	const changeList: Change[] = [];
 
-	File.forEach((File) => {
+	File.forEach(async (File) => {
 		const {
 			changed,
 			text: Text,
 			changes: Change,
-		} = replaceAliasPathsInFile(File, Alias, Path);
+		} = (await import("@Function/Replace.js")).default(File, Alias, Path);
 
 		if (!changed) {
 			return;
 		}
-		
+
 		changeList.push({ File, Text, Change });
 	});
 
 	return changeList;
 };
-
-/**
- * Read the file at the given path and return the text with aliased paths replaced.
- *
- * @param filePath The path to the file.
- * @param aliases The path mapping configuration from tsconfig.
- * @param programPaths Program options.
- */
-export function replaceAliasPathsInFile(
-	filePath: string,
-	aliases: Alias[],
-	programPaths: Pick<ProgramPaths, "Source" | "Target">
-): { changed: boolean; text: string; changes: TextChange[] } {
-	if (!existsSync(filePath)) {
-		throw new FileNotFound(replaceAliasPathsInFile.name, filePath);
-	}
-
-	const originalText = readFileSync(filePath, "utf-8");
-
-	const changes: TextChange[] = [];
-
-	const newText = originalText.replace(
-		IMPORT_EXPORT_REGEX,
-		(original, importStatement: string, importSpecifier: string) => {
-			// The import is an esm import if it is inside a typescript (definition) file or if it uses `import` or `export`
-			const esmImport =
-				!filePath.endsWith(".ts") &&
-				(importStatement.includes("import") ||
-					importStatement.includes("export"));
-
-			const result = aliasToRelativePath(
-				importSpecifier,
-				filePath,
-				aliases,
-				programPaths,
-				esmImport
-			);
-
-			if (!result.replacement) {
-				return original;
-			}
-
-			const index = original.lastIndexOf(importSpecifier);
-
-			changes.push({
-				Original: Normalize(result.original),
-				Modify: Normalize(result.replacement),
-			});
-
-			return (
-				original.substring(0, index) +
-				result.replacement +
-				original.substring(index + importSpecifier.length)
-			);
-		}
-	);
-
-	return { changed: originalText !== newText, text: newText, changes };
-}
 
 /**
  * Convert an aliased path to a relative path.
@@ -96,6 +38,7 @@ export function replaceAliasPathsInFile(
  * @param aliases The path mapping configuration from tsconfig.
  * @param programPaths Program options.
  * @param esModule Whether the import will be resolved with ES module semantics or commonjs semantics
+ *
  */
 export function aliasToRelativePath(
 	importSpecifier: string,
