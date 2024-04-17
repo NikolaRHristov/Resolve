@@ -22,7 +22,6 @@ export default (
 		if (!changed) {
 			return;
 		}
-
 		
 		changeList.push({ File, Text, Change });
 	});
@@ -254,7 +253,7 @@ function isDirectory(path: string) {
 import { existsSync, readFileSync, statSync } from "fs";
 import { basename, dirname, join, relative, resolve } from "path";
 
-import FileNotFound from "@Class/Error/FileNotFound";
+import FileNotFound from "@Class/Error/FileNotFound.js";
 import Normalize from "@Function/Normalize";
 
 import type Alias from "@Interface/Alias.js";
