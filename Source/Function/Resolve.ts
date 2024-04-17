@@ -53,7 +53,7 @@ export const _Function = async () => {
 
 		logger.Param(
 			"fileChanges",
-			changes.map(({ file, changes }) => ({ file, changes }))
+			changes.map(({ File, Change }) => ({ file: File, changes: Change }))
 		);
 
 		if (options.NoEmit) {

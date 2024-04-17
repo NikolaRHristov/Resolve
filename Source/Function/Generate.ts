@@ -1,35 +1,3 @@
-import { existsSync, readFileSync, statSync } from "fs";
-import { basename, dirname, join, relative, resolve } from "path";
-
-import { FileNotFoundError } from "~/utils/errors";
-import { normalizePath } from "~/utils/path";
-
-import type Alias from "@Interface/Alias.js";
-import type Change from "@Interface/Change.js";
-import type ProgramPaths from "@Interface/ProgramPaths.js";
-import type TextChange from "@Interface/TextChange.js";
-
-export const IMPORT_EXPORT_REGEX =
-	/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g;
-
-export const ESM_IMPORT_EXPORT_REGEX =
-	/(?:(?:import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g;
-
-export const COMMONJS_IMPORT_EXPORT_REGEX =
-	/(?:(?:require\(|require\.resolve\()\s+)['"]([^'"]*)['"]\)/g;
-
-const MODULE_EXTS = [
-	".js",
-	".jsx",
-	".ts",
-	".tsx",
-	".cjs",
-	".mjs",
-	".mdx",
-	".d.ts",
-	".json",
-];
-
 /**
  * Generate the alias path mapping changes to apply to the provide files.
  *
@@ -44,18 +12,18 @@ export default (
 ): Change[] => {
 	const changeList: Change[] = [];
 
-	for (const file of files) {
-		const { changed, text, changes } = replaceAliasPathsInFile(
-			file,
-			aliases,
-			programPaths
-		);
+	for (const File of files) {
+		const {
+			changed,
+			text: Text,
+			changes: Change,
+		} = replaceAliasPathsInFile(File, aliases, programPaths);
 
 		if (!changed) {
 			continue;
 		}
 
-		changeList.push({ file, text, changes });
+		changeList.push({ File, Text, Change });
 	}
 
 	return changeList;
@@ -74,7 +42,7 @@ export function replaceAliasPathsInFile(
 	programPaths: Pick<ProgramPaths, "Source" | "Target">
 ): { changed: boolean; text: string; changes: TextChange[] } {
 	if (!existsSync(filePath)) {
-		throw new FileNotFoundError(replaceAliasPathsInFile.name, filePath);
+		throw new FileNotFound(replaceAliasPathsInFile.name, filePath);
 	}
 
 	const originalText = readFileSync(filePath, "utf-8");
@@ -105,8 +73,8 @@ export function replaceAliasPathsInFile(
 			const index = original.lastIndexOf(importSpecifier);
 
 			changes.push({
-				Original: normalizePath(result.original),
-				Modify: normalizePath(result.replacement),
+				Original: Normalize(result.original),
+				Modify: Normalize(result.replacement),
 			});
 
 			return (
@@ -204,10 +172,10 @@ export function aliasToRelativePath(
 		: relativePathJsExtension.replace(/\.jsx$/, ".js");
 
 	return {
-		file: normalizePath(outputFile),
-		original: normalizePath(importSpecifier),
+		file: Normalize(outputFile),
+		original: Normalize(importSpecifier),
 		...(importSpecifier !== relativePathJsxExtension && {
-			replacement: normalizePath(relativePathJsxExtension),
+			replacement: Normalize(relativePathJsxExtension),
 		}),
 	};
 }
@@ -281,3 +249,35 @@ function isDirectory(path: string) {
 		return false;
 	}
 }
+
+import { existsSync, readFileSync, statSync } from "fs";
+import { basename, dirname, join, relative, resolve } from "path";
+
+import FileNotFound from "@Class/Error/FileNotFound";
+import Normalize from "@Function/Normalize";
+
+import type Alias from "@Interface/Alias.js";
+import type Change from "@Interface/Change.js";
+import type ProgramPaths from "@Interface/ProgramPaths.js";
+import type TextChange from "@Interface/TextChange.js";
+
+export const IMPORT_EXPORT_REGEX =
+	/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g;
+
+export const ESM_IMPORT_EXPORT_REGEX =
+	/(?:(?:import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g;
+
+export const COMMONJS_IMPORT_EXPORT_REGEX =
+	/(?:(?:require\(|require\.resolve\()\s+)['"]([^'"]*)['"]\)/g;
+
+const MODULE_EXTS = [
+	".js",
+	".jsx",
+	".ts",
+	".tsx",
+	".cjs",
+	".mjs",
+	".mdx",
+	".d.ts",
+	".json",
+];
