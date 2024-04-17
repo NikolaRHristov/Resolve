@@ -16,51 +16,71 @@ export const _Function = async (
 			await import("fs/promises")
 		).access(filePath, (await import("fs/promises")).constants.F_OK);
 	} catch (error) {
-		throw new FileNotFound(_Function.name, filePath);
+		throw new (await import("@Class/Error/FileNotFound")).default(
+			_Function.name,
+			filePath
+		);
 	}
 
-	const Text = readFileSync(filePath, "utf-8");
+	const Text = await (
+		await import("fs/promises")
+	).readFile(filePath, "utf-8");
 
 	const Change: TextChange[] = [];
 
-	const newText = Text.replace(
-		/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g,
-		async (Text: string, Statement: string, Specifier: string) => {
-			// The import is an esm import if it is inside a typescript (definition) file or if it uses `import` or `export`
-			const { Original, Replace } = await (
-				await import("@Function/Convert")
-			).default(
-				Specifier,
-				filePath,
-				Alias,
-				Path,
-				!filePath.endsWith(".ts") &&
-					(Statement.includes("import") ||
-						Statement.includes("export"))
-			);
-
-			if (!Result.Replace) {
-				return Text;
-			}
-
-			const Index = Text.lastIndexOf(Specifier);
-
-			Change.push({
-				Original: Normalize(Result.Original),
-				Modify: Normalize(Result.Replace),
-			});
-
-			return (
-				Text.substring(0, Index) +
-				Result.Replace +
-				Text.substring(Index + Specifier.length)
-			);
-		}
+	const Match = Text.match(
+		/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g
 	);
 
+	const Replace = Match
+		? await Promise.all(
+				Match.map(async (Match) => {
+					const Result = Match.match(
+						/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/
+					);
+
+					if (!Result) {
+						return Match;
+					}
+
+					const [, Statement, Specifier] = Result;
+
+					// The import is an esm import if it is inside a typescript (definition) file or if it uses `import` or `export`
+					const { Original, Replace } = await (
+						await import("@Function/Convert")
+					).default(
+						Specifier ?? "",
+						filePath,
+						Alias,
+						Path,
+						!filePath.endsWith(".ts") &&
+							(Statement?.includes("import") ||
+								Statement?.includes("export"))
+					);
+
+					if (!Replace) {
+						return Text;
+					}
+
+					const Index = Text.lastIndexOf(Specifier ?? "");
+
+					Change.push({
+						Original: Normalize(Original),
+						Modify: Normalize(Replace),
+					});
+
+					return (
+						Text.substring(0, Index) +
+						Replace +
+						Text.substring(Index + (Specifier ?? "").length)
+					);
+				})
+			)
+		: Text;
+
 	return {
-		Changed: Text !== newText,
-		Text: newText,
+		Changed: Text !== Replace,
+		Text: Replace.toString(),
 		Change: Change,
 	};
 };

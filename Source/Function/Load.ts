@@ -1,35 +1,33 @@
 /**
  * Load the tsconfig file using Typescript's built-in config file loader.
  *
- * @param path The path to the tsconfig file.
+ * @param Path The path to the tsconfig file.
  *
  */
-export const _Function = (path: string): TSConfig => {
-	const NameConfig = findConfigFile(process.cwd(), sys.fileExists, path);
+export const _Function = async (Path: string): Promise<TSConfig> => {
+	const NameConfig = (await import("typescript")).findConfigFile(
+		process.cwd(),
+		sys.fileExists,
+		Path
+	);
 
 	if (!NameConfig) {
-		throw new FileNotFoundError(_Function.name, path);
+		throw new (await import("@Class/Error/FileNotFound.js")).default(
+			_Function.name,
+			Path
+		);
 	}
 
-	const directory = dirname(NameConfig);
-
-	const options = parseJsonConfigFileContent(
-		readConfigFile(NameConfig, sys.readFile).config,
+	return (await import("typescript")).parseJsonConfigFileContent(
+		(await import("typescript")).readConfigFile(NameConfig, sys.readFile)
+			.config,
 		sys,
-		directory
+		(await import("path")).dirname(NameConfig)
 	);
-	return options;
 };
 
 export default _Function;
 
-import { dirname } from "path";
-import {
-	sys,
-	findConfigFile,
-	parseJsonConfigFileContent,
-	readConfigFile,
-} from "typescript";
+export const { sys } = await import("typescript");
 
 import type TSConfig from "@Interface/TSConfig";
-import FileNotFoundError from "@Class/Error/FileNotFound";

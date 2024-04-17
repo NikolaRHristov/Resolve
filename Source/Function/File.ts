@@ -1,7 +1,7 @@
-export default (path: string) => {
+export default async (path: string) => {
 	try {
-		return statSync(path).isFile();
-	} catch (e) {
+		return (await (await import("fs/promises")).stat(path)).isFile();
+	} catch (_Error) {
 		return false;
 	}
 };
