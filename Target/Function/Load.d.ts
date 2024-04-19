@@ -1,9 +1,10 @@
 /**
  * Load the tsconfig file using Typescript's built-in config file loader.
  *
- * @param path The path to the tsconfig file.
+ * @param Path The path to the tsconfig file.
  *
  */
-export declare const _Function: (path: string) => TSConfig;
+export declare const _Function: (Path: string) => Promise<TSConfig>;
 export default _Function;
+export declare const sys: import("typescript").System;
 import type TSConfig from "@Interface/TSConfig";
