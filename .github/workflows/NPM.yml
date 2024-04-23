@@ -37,7 +37,6 @@ jobs:
               continue-on-error: true
               working-directory: .
               run: |
-                  npm install --legacy-peer-deps --include optional
                   npm publish --legacy-peer-deps --provenance
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
