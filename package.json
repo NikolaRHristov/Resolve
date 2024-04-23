@@ -2,7 +2,7 @@
 	"name": "@playform/resolve",
 	"version": "0.0.1",
 	"private": false,
-	"description": "⛵ Resolve.",
+	"description": "⛵ Resolve —",
 	"keywords": [
 		"typescript",
 		"tsc",
@@ -47,7 +47,7 @@
 		"ts-node": "10.9.2",
 		"tsconfig-paths": "4.2.0",
 		"typescript": "5.4.5",
-		"vite": "5.2.9"
+		"vite": "5.2.10"
 	},
 	"peerDependencies": {
 		"@playform/build": "0.0.7"
