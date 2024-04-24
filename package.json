@@ -12,19 +12,19 @@
 		"compiler",
 		"playform"
 	],
-	"homepage": "HTTPS://GitHub.Com/Playform/Resolve#readme",
+	"homepage": "HTTPS://GitHub.Com/PlayForm/Resolve#readme",
 	"bugs": {
-		"url": "HTTPS://GitHub.Com/Playform/Resolve/issues"
+		"url": "HTTPS://GitHub.Com/PlayForm/Resolve/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+HTTPS://github.com/Playform/Resolve.git"
+		"url": "git+HTTPS://github.com/PlayForm/Resolve.git"
 	},
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
 		"name": "⛲ Source ⁄ 🚪 Open —",
-		"email": "Source/Open@Playform.Cloud",
-		"url": "HTTPS://Playform.Cloud"
+		"email": "Source/Open@PlayForm.Cloud",
+		"url": "HTTPS://PlayForm.Cloud"
 	},
 	"type": "module",
 	"main": "./Target/Class/Resolve.js",
