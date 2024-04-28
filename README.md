@@ -1,4 +1,4 @@
-# ⛵ [Resolve.]
+# ⛵ [Resolve —]
 
 [![npm](https://img.shields.io/npm/v/@playform/resolve?style=flat-square)](https://www.npmjs.com/package/@playform/resolve)
 [![license](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
@@ -163,7 +163,7 @@ Use this flag to not emit any changes to your files. Recommended to be used with
 
 _This option is only available when using the CLI._
 
-[Resolve.]: HTTPS://npmjs.org/@playform/resolve
+[Resolve —]: httpS://npmjs.org/@playform/resolve
 
 ## Changelog
 
