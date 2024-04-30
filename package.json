@@ -2,7 +2,7 @@
 	"name": "@playform/resolve",
 	"version": "0.0.1",
 	"private": false,
-	"description": "⛵ Resolve —",
+	"description": "⛵ — Resolve —",
 	"keywords": [
 		"typescript",
 		"tsc",
@@ -22,7 +22,7 @@
 	},
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
-		"name": "⛲ Source ⁄ 🚪 Open —",
+		"name": "⛲ Source ⁄ 🚪 — Open —",
 		"email": "Source/Open@PlayForm.Cloud",
 		"url": "HTTPS://PlayForm.Cloud"
 	},
