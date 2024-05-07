@@ -89,6 +89,6 @@ export default _Function;
 
 export const { default: Normalize } = await import("@Function/Normalize");
 
-import type Alias from "@Interface/Alias";
-import type ProgramPaths from "@Interface/ProgramPaths";
-import type TextChange from "@Interface/TextChange";
+import type Alias from "../Interface/Alias";
+import type ProgramPaths from "../Interface/ProgramPaths";
+import type TextChange from "../Interface/TextChange";

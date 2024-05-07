@@ -82,6 +82,6 @@ export const _Function = async () => {
 
 await _Function();
 
-import type Interface from "@Interface/ProgramOptions.js";
+import type Interface from "../Interface/ProgramOptions.js";
 
 export const { bold } = await import("ansi-colors");

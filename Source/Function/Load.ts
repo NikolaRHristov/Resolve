@@ -30,4 +30,4 @@ export default _Function;
 
 export const { sys } = await import("typescript");
 
-import type TSConfig from "@Interface/TSConfig";
+import type TSConfig from "../Interface/TSConfig";

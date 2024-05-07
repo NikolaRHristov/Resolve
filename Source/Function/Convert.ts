@@ -77,5 +77,5 @@ export const { default: Import } = await import("@Function/Resolve/Import");
 
 export const { resolve, relative, dirname } = await import("path");
 
-import type Alias from "@Interface/Alias";
-import type ProgramPaths from "@Interface/ProgramPaths";
+import type Alias from "../Interface/Alias";
+import type ProgramPaths from "../Interface/ProgramPaths";

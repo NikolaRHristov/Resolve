@@ -9,4 +9,4 @@ export default interface Interface {
 	Change?: TextChange[];
 }
 
-import type TextChange from "@Interface/TextChange.js";
+import type TextChange from "../Interface/TextChange.js";

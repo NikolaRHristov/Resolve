@@ -1,5 +1,5 @@
 import DEFAULT_EXTENSIONS from "@Variable/Extension";
-import type ProgramOptions from "@Interface/ProgramOptions";
+import type ProgramOptions from "../Interface/ProgramOptions";
 
 export type ResolveTsPathOptions = Omit<
 	Partial<ProgramOptions>,

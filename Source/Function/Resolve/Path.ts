@@ -41,6 +41,6 @@ export const _Function = async (
 
 export default _Function;
 
-import type Interface from "@Interface/ProgramOptions.js";
-import type ProgramPaths from "@Interface/ProgramPaths.js";
-import type TSConfig from "@Interface/TSConfig.js";
+import type Interface from "../Interface/ProgramOptions.js";
+import type ProgramPaths from "../Interface/ProgramPaths.js";
+import type TSConfig from "../Interface/TSConfig.js";

@@ -30,6 +30,6 @@ export default (
 	return Change;
 };
 
-import type Alias from "@Interface/Alias.js";
-import type Change from "@Interface/Change.js";
-import type ProgramPaths from "@Interface/ProgramPaths.js";
+import type Alias from "../Interface/Alias.js";
+import type Change from "../Interface/Change.js";
+import type ProgramPaths from "../Interface/ProgramPaths.js";

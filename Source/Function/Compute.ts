@@ -38,7 +38,7 @@ export const _Function = async (
 	return Alias;
 };
 
-import type Alias from "@Interface/Alias.js";
+import type Alias from "../Interface/Alias.js";
 
 export const Regex = /\*$/;
 

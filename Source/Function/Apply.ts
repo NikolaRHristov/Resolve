@@ -10,4 +10,4 @@ export default (Change: Change[]) =>
 		})
 	);
 
-import type Change from "@Interface/Change.js";
+import type Change from "../Interface/Change.js";
