@@ -44,6 +44,7 @@ export default class {
 				}
 			}
 		}
+
 		this.Verbose();
 	}
 

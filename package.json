@@ -27,10 +27,10 @@
 		"url": "HTTPS://PlayForm.Cloud"
 	},
 	"type": "module",
-	"main": "./Target/Class/Resolve.js",
-	"types": "./Target/Class/Resolve.d.ts",
+	"main": "./Target/Void/Resolve.js",
+	"types": "./Target/Void/Resolve.d.ts",
 	"bin": {
-		"Resolve": "Target/Class/Resolve.js"
+		"Resolve": "Target/Void/Resolve.js"
 	},
 	"scripts": {
 		"Document": "Document 'Source/**/*.ts'",

@@ -7,4 +7,4 @@
 export declare const _Function: (Path: string) => Promise<TSConfig>;
 export default _Function;
 export declare const sys: import("typescript").System;
-import type TSConfig from "@Interface/TSConfig";
+import type TSConfig from "../Interface/TSConfig";

@@ -5,4 +5,4 @@
  */
 declare const _default: (Change: Change[]) => void;
 export default _default;
-import type Change from "@Interface/Change.js";
+import type Change from "../Interface/Change.js";

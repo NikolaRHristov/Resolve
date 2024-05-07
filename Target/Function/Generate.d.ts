@@ -8,6 +8,6 @@
  */
 declare const _default: (File: string[], Alias: Alias[], Path: Pick<ProgramPaths, "Source" | "Target">) => Change[];
 export default _default;
-import type Alias from "@Interface/Alias.js";
-import type Change from "@Interface/Change.js";
-import type ProgramPaths from "@Interface/ProgramPaths.js";
+import type Alias from "../Interface/Alias.js";
+import type Change from "../Interface/Change.js";
+import type ProgramPaths from "../Interface/ProgramPaths.js";

@@ -14,11 +14,11 @@ export const _Function = async () => {
 	Logger.Param("options", Option);
 
 	try {
-		const tsConfig = (await import("@Function/Load.js")).default(
-			Option.Project
-		);
+		const Configuration = await (
+			await import("@Function/Load.js")
+		).default(Option.Project);
 
-		const { rootDir, outDir, baseUrl, paths } = tsConfig.options ?? {};
+		const { rootDir, outDir, baseUrl, paths } = Configuration.options ?? {};
 
 		Logger.Param("compilerOptions", {
 			rootDir,
@@ -29,13 +29,13 @@ export const _Function = async () => {
 
 		const Path = await (
 			await import("@Function/Resolve/Path.js")
-		).default(Option, tsConfig);
+		).default(Option, Configuration);
 
 		Logger.Param("Path", Path);
 
 		const Alias = await (
 			await import("@Function/Compute.js")
-		).default(Path.Base, tsConfig?.options?.paths ?? {});
+		).default(Path.Base, Configuration?.options?.paths ?? {});
 
 		Logger.Param("Alias", Alias);
 
@@ -45,7 +45,7 @@ export const _Function = async () => {
 
 		Logger.Param("filesToProcess", File);
 
-		const changes = (await import("@Function/Generate.js")).default(
+		const Change = (await import("@Function/Generate.js")).default(
 			File,
 			Alias,
 			Path
@@ -53,20 +53,20 @@ export const _Function = async () => {
 
 		Logger.Param(
 			"fileChanges",
-			changes.map(({ File, Change }) => ({ file: File, changes: Change }))
+			Change.map(({ File, Change }) => ({ file: File, changes: Change }))
 		);
 
 		if (Option.NoEmit) {
 			Logger.Info(
 				bold("Resolve:"),
 				"discovered",
-				changes.length,
+				Change.length,
 				"file(s) for change (none actually changed since --noEmit was given)"
 			);
 		} else {
-			(await import("@Function/Apply.js")).default(changes);
+			(await import("@Function/Apply.js")).default(Change);
 
-			Logger.Info(bold("Resolve:"), "changed", changes.length, "file(s)");
+			Logger.Info(bold("Resolve:"), "changed", Change.length, "file(s)");
 		}
 	} catch (_Error) {
 		if (_Error instanceof (await import("@Class/Error/Step.js")).default) {
