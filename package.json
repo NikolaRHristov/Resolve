@@ -44,7 +44,7 @@
 	"devDependencies": {
 		"@playform/document": "0.0.6",
 		"@types/node": "20.12.11",
-		"rimraf": "5.0.5",
+		"rimraf": "5.0.7",
 		"ts-node": "10.9.2",
 		"tsconfig-paths": "4.2.0",
 		"typescript": "5.4.5",
