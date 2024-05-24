@@ -4,4 +4,4 @@ export default (path: string) => {
 	} catch (_Error) {
 		return false;
 	}
-}
+};
