@@ -13,23 +13,22 @@ export default async (
 	File: string,
 	Alias: Alias[],
 	{ Source, Target }: Pick<ProgramPaths, "Source" | "Target">,
-	Module?: boolean
+	Module?: boolean,
 ): Promise<{ Original: string; Replace?: string }> => {
 	const Directory = dirname(resolve(Source, relative(Target, File)));
 
-	const Absolute = await (
-		Specifier.startsWith("./") || Specifier.startsWith("../")
-			? [resolve(Directory, Specifier)]
-			: Alias.filter(({ Prefix }) =>
-					Specifier.startsWith(Prefix)
-				).flatMap(({ Prefix, Path }) =>
+	const Absolute = await (Specifier.startsWith("./") ||
+	Specifier.startsWith("../")
+		? [resolve(Directory, Specifier)]
+		: Alias.filter(({ Prefix }) => Specifier.startsWith(Prefix)).flatMap(
+				({ Prefix, Path }) =>
 					Path.map((aliasPath) =>
-						resolve(aliasPath, Specifier.replace(Prefix, ""))
-					)
-				)
+						resolve(aliasPath, Specifier.replace(Prefix, "")),
+					),
+			)
 	).reduce<null | ReturnType<typeof Import>>(
 		async (acc, path) => acc || (await Import(path)),
-		null
+		null,
 	);
 
 	if (!Absolute) {
@@ -45,7 +44,7 @@ export default async (
 		Absolute.Type === "file"
 			? (await import("path")).join(
 					relative(Directory, dirname(ImportAbsolute)),
-					(await import("path")).basename(ImportAbsolute)
+					(await import("path")).basename(ImportAbsolute),
 				)
 			: relative(Directory, ImportAbsolute)
 					.replace(/^(?!\.+\/)/, (m) => `./${m}`)
@@ -54,11 +53,11 @@ export default async (
 							.replace(/\.ts$/, ".js")
 							.replace(/\.tsx$/, ".jsx")
 							.replace(/\.mts$/, ".mjs")
-							.replace(/\.cts$/, ".cjs")
+							.replace(/\.cts$/, ".cjs"),
 					);
 
 	const Extension = (await import("@Function/File.js")).default(
-		resolve(dirname(File), Relative)
+		resolve(dirname(File), Relative),
 	)
 		? Relative
 		: Relative.replace(/\.jsx$/, ".js");

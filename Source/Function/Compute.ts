@@ -4,7 +4,7 @@
  */
 export const _Function = async (
 	Base: string,
-	Path: { [key: string]: string[] }
+	Path: { [key: string]: string[] },
 ): Promise<Alias[]> => {
 	const Alias: Alias[] = await Promise.all(
 		Object.keys(Path).map(async (Alias) => ({
@@ -14,11 +14,11 @@ export const _Function = async (
 				Path[Alias]?.map(async (Path: string) =>
 					(await import("path")).resolve(
 						Base,
-						Path.replace(Regex, "")
-					)
-				) ?? []
+						Path.replace(Regex, ""),
+					),
+				) ?? [],
 			),
-		}))
+		})),
 	);
 
 	/**
@@ -30,7 +30,7 @@ export const _Function = async (
 		if (Alias.startsWith("./") || Alias.startsWith("../")) {
 			throw new (await import("@Class/Error/InvalidAliasError")).default(
 				_Function.name,
-				Alias
+				Alias,
 			);
 		}
 	});

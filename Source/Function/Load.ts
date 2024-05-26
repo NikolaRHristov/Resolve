@@ -8,13 +8,13 @@ export const _Function = async (Path: string): Promise<TSConfig> => {
 	const NameConfig = (await import("typescript")).findConfigFile(
 		process.cwd(),
 		sys.fileExists,
-		Path
+		Path,
 	);
 
 	if (!NameConfig) {
 		throw new (await import("@Class/Error/FileNotFound.js")).default(
 			_Function.name,
-			Path
+			Path,
 		);
 	}
 
@@ -22,7 +22,7 @@ export const _Function = async (Path: string): Promise<TSConfig> => {
 		(await import("typescript")).readConfigFile(NameConfig, sys.readFile)
 			.config,
 		sys,
-		(await import("path")).dirname(NameConfig)
+		(await import("path")).dirname(NameConfig),
 	);
 };
 

@@ -9,15 +9,15 @@
 export default (
 	File: string[],
 	Alias: Alias[],
-	Path: Pick<ProgramPaths, "Source" | "Target">
+	Path: Pick<ProgramPaths, "Source" | "Target">,
 ): Change[] => {
 	const Change: Change[] = [];
 
 	File.forEach(async (File) => {
 		const {
 			Changed: changed,
-			Text: Text,
-			Change: Change,
+			Text,
+			Change,
 		} = (await import("@Function/Replace.js")).default(File, Alias, Path);
 
 		if (!changed) {

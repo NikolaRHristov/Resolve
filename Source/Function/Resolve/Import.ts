@@ -6,14 +6,14 @@
  */
 export default async (Path: string) => {
 	const Import = Path.replace(/\.[^/.]*js[^/.]*$/, (match) =>
-		match.replace("js", "ts")
+		match.replace("js", "ts"),
 	);
 
 	const Existing = [
 		Path,
 		Import,
 		...Module.map(
-			(ext) => `${Path.replace(/\.[^/.]*(js|json)[^/.]*$/, "")}${ext}`
+			(ext) => `${Path.replace(/\.[^/.]*(js|json)[^/.]*$/, "")}${ext}`,
 		),
 	].find((path) => File(path));
 

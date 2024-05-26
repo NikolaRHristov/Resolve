@@ -9,34 +9,36 @@
 export const _Function = async (
 	filePath: string,
 	Alias: Alias[],
-	Path: Pick<ProgramPaths, "Source" | "Target">
+	Path: Pick<ProgramPaths, "Source" | "Target">,
 ): Promise<{ Changed: boolean; Text: string; Change: TextChange[] }> => {
 	try {
-		await (
-			await import("fs/promises")
-		).access(filePath, (await import("fs/promises")).constants.F_OK);
+		await (await import("fs/promises")).access(
+			filePath,
+			(await import("fs/promises")).constants.F_OK,
+		);
 	} catch (error) {
 		throw new (await import("@Class/Error/FileNotFound")).default(
 			_Function.name,
-			filePath
+			filePath,
 		);
 	}
 
-	const Text = await (
-		await import("fs/promises")
-	).readFile(filePath, "utf-8");
+	const Text = await (await import("fs/promises")).readFile(
+		filePath,
+		"utf-8",
+	);
 
 	const Change: TextChange[] = [];
 
 	const Match = Text.match(
-		/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g
+		/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/g,
 	);
 
 	const Replace = Match
 		? await Promise.all(
 				Match.map(async (Match) => {
 					const Result = Match.match(
-						/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/
+						/((?:require\(|require\.resolve\(|import\()|(?:import|export)\s+(?:[\s\S]*?from\s+)?)['"]([^'"]*)['"]\)?/,
 					);
 
 					if (!Result) {
@@ -55,7 +57,7 @@ export const _Function = async (
 						Path,
 						!filePath.endsWith(".ts") &&
 							(Statement?.includes("import") ||
-								Statement?.includes("export"))
+								Statement?.includes("export")),
 					);
 
 					if (!Replace) {
@@ -74,7 +76,7 @@ export const _Function = async (
 						Replace +
 						Text.substring(Index + (Specifier ?? "").length)
 					);
-				})
+				}),
 			)
 		: Text;
 

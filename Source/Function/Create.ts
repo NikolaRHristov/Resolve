@@ -13,19 +13,19 @@ export default async () =>
 			`
 	Example:
 	$ Resolve --project tsconfig.json --src ./src -out ./dist
-`
+`,
 		)
 		.option(
 			"-p, --project <path>",
 			"path to tsconfig file",
-			"tsconfig.json"
+			"tsconfig.json",
 		)
 		.option("-s, --src <path>", "path to source directory")
 		.option("-o, --out <path>", "path to output directory")
 		.option(
 			"--ext <extensions...>",
 			"space-delimited list of file extensions to process",
-			(await import("@Variable/Extension.js")).default
+			(await import("@Variable/Extension.js")).default,
 		)
 		.option("--verbose", "output logs", false)
 		.option("--noEmit", "changes will not be emitted", false);

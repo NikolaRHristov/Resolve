@@ -6,7 +6,7 @@ import { dirname, resolve } from "path";
  */
 export const _Function = async (
 	options: Pick<Interface, "Target" | "Project" | "Source">,
-	tsConfig: TSConfig
+	tsConfig: TSConfig,
 ): Promise<ProgramPaths> => {
 	const { baseUrl = "", outDir, paths } = tsConfig.options ?? {};
 
@@ -15,14 +15,14 @@ export const _Function = async (
 	if (!Target) {
 		throw new (await import("@Class/Error/Step.js")).default(
 			_Function.name,
-			"Output directory must be specified using either the --out option or in tsconfig"
+			"Output directory must be specified using either the --out option or in tsconfig",
 		);
 	}
 
 	if (!paths) {
 		throw new (await import("@Class/Error/TSConfigPropertyError")).default(
 			_Function.name,
-			"compilerOptions.paths"
+			"compilerOptions.paths",
 		);
 	}
 

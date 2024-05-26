@@ -6,7 +6,7 @@ export const _Function = async () => {
 		.opts<Interface>();
 
 	const Logger = new (await import("@Class/Logger.js")).default(
-		Option.Verbose ? "verbose" : "info"
+		Option.Verbose ? "verbose" : "info",
 	);
 
 	Logger.Verbose();
@@ -14,9 +14,9 @@ export const _Function = async () => {
 	Logger.Param("options", Option);
 
 	try {
-		const Configuration = await (
-			await import("@Function/Load.js")
-		).default(Option.Project);
+		const Configuration = await (await import("@Function/Load.js")).default(
+			Option.Project,
+		);
 
 		const { rootDir, outDir, baseUrl, paths } = Configuration.options ?? {};
 
@@ -27,33 +27,36 @@ export const _Function = async () => {
 			paths,
 		});
 
-		const Path = await (
-			await import("@Function/Resolve/Path.js")
-		).default(Option, Configuration);
+		const Path = await (await import("@Function/Resolve/Path.js")).default(
+			Option,
+			Configuration,
+		);
 
 		Logger.Param("Path", Path);
 
-		const Alias = await (
-			await import("@Function/Compute.js")
-		).default(Path.Base, Configuration?.options?.paths ?? {});
+		const Alias = await (await import("@Function/Compute.js")).default(
+			Path.Base,
+			Configuration?.options?.paths ?? {},
+		);
 
 		Logger.Param("Alias", Alias);
 
-		const File = await (
-			await import("@Function/Get.js")
-		).default(Path.Target, Option.Extension);
+		const File = await (await import("@Function/Get.js")).default(
+			Path.Target,
+			Option.Extension,
+		);
 
 		Logger.Param("filesToProcess", File);
 
 		const Change = (await import("@Function/Generate.js")).default(
 			File,
 			Alias,
-			Path
+			Path,
 		);
 
 		Logger.Param(
 			"fileChanges",
-			Change.map(({ File, Change }) => ({ file: File, changes: Change }))
+			Change.map(({ File, Change }) => ({ file: File, changes: Change })),
 		);
 
 		if (Option.NoEmit) {
@@ -61,7 +64,7 @@ export const _Function = async () => {
 				bold("Resolve:"),
 				"discovered",
 				Change.length,
-				"file(s) for change (none actually changed since --noEmit was given)"
+				"file(s) for change (none actually changed since --noEmit was given)",
 			);
 		} else {
 			(await import("@Function/Apply.js")).default(Change);
@@ -72,7 +75,7 @@ export const _Function = async () => {
 		if (_Error instanceof (await import("@Class/Error/Step.js")).default) {
 			Logger.Error(
 				`Error during step '${bold(_Error.Step)}'`,
-				_Error.message
+				_Error.message,
 			);
 		} else {
 			throw _Error;
