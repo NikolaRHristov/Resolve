@@ -41,6 +41,7 @@
 		"fast-glob": "3.3.2"
 	},
 	"devDependencies": {
+		"@playform/build": "0.0.9",
 		"@playform/document": "0.0.7",
 		"@types/node": "20.12.12",
 		"rimraf": "5.0.7",
@@ -48,13 +49,5 @@
 		"tsconfig-paths": "4.2.0",
 		"typescript": "5.4.5",
 		"vite": "5.2.11"
-	},
-	"peerDependencies": {
-		"@playform/build": "0.0.9"
-	},
-	"peerDependenciesMeta": {
-		"@playform/build": {
-			"optional": true
-		}
 	}
 }
