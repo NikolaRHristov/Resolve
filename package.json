@@ -33,7 +33,6 @@
 		"Resolve": "Target/Void/Resolve.js"
 	},
 	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
 		"prepublishOnly": "Build 'Source/**/*.ts'"
 	},
 	"dependencies": {
