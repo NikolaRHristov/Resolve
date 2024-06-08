@@ -43,11 +43,11 @@
 	"devDependencies": {
 		"@playform/build": "0.0.10",
 		"@playform/document": "0.0.10",
-		"@types/node": "20.12.13",
+		"@types/node": "20.14.2",
 		"rimraf": "5.0.7",
 		"ts-node": "10.9.2",
 		"tsconfig-paths": "4.2.0",
 		"typescript": "5.4.5",
-		"vite": "5.2.12"
+		"vite": "5.2.13"
 	}
 }
