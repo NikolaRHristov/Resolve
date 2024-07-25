@@ -42,7 +42,7 @@
 		"fast-glob": "3.3.2"
 	},
 	"devDependencies": {
-		"@playform/build": "0.1.1",
+		"@playform/build": "0.1.2",
 		"@types/node": "20.14.12",
 		"rimraf": "6.0.1",
 		"ts-node": "11.0.0-beta.1",
