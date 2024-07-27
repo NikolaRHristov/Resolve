@@ -18,9 +18,9 @@ export default async (Target: string, Extension: string[]) => {
 			await (
 				await import("fast-glob")
 			).default(
-				`${(
-					await import("@Function/Normalize")
-				).default(Target)}/**/${Search}`,
+				`${(await import("@Function/Normalize")).default(
+					Target,
+				)}/**/${Search}`,
 				{
 					dot: true,
 					onlyFiles: true,
