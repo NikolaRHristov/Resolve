@@ -12,9 +12,10 @@ export const _Function = async (
 	Path: Pick<ProgramPaths, "Source" | "Target">,
 ): Promise<{ Changed: boolean; Text: string; Change: TextChange[] }> => {
 	try {
-		await (
-			await import("fs/promises")
-		).access(filePath, (await import("fs/promises")).constants.F_OK);
+		await (await import("fs/promises")).access(
+			filePath,
+			(await import("fs/promises")).constants.F_OK,
+		);
 	} catch (error) {
 		throw new (await import("@Class/Error/FileNotFound")).default(
 			_Function.name,
@@ -22,9 +23,10 @@ export const _Function = async (
 		);
 	}
 
-	const Text = await (
-		await import("fs/promises")
-	).readFile(filePath, "utf-8");
+	const Text = await (await import("fs/promises")).readFile(
+		filePath,
+		"utf-8",
+	);
 
 	const Change: TextChange[] = [];
 
@@ -89,6 +91,6 @@ export default _Function;
 
 export const { default: Normalize } = await import("@Function/Normalize");
 
-import type Alias from "../Interface/Alias";
-import type ProgramPaths from "../Interface/ProgramPaths";
-import type TextChange from "../Interface/TextChange";
+import type Alias from "../Interface/Alias.tsx";
+import type ProgramPaths from "../Interface/ProgramPaths.tsx";
+import type TextChange from "../Interface/TextChange.tsx";

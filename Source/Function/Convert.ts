@@ -17,16 +17,15 @@ export default async (
 ): Promise<{ Original: string; Replace?: string }> => {
 	const Directory = dirname(resolve(Source, relative(Target, File)));
 
-	const Absolute = await (
-		Specifier.startsWith("./") || Specifier.startsWith("../")
-			? [resolve(Directory, Specifier)]
-			: Alias.filter(({ Prefix }) =>
-					Specifier.startsWith(Prefix),
-				).flatMap(({ Prefix, Path }) =>
+	const Absolute = await (Specifier.startsWith("./") ||
+	Specifier.startsWith("../")
+		? [resolve(Directory, Specifier)]
+		: Alias.filter(({ Prefix }) => Specifier.startsWith(Prefix)).flatMap(
+				({ Prefix, Path }) =>
 					Path.map((aliasPath) =>
 						resolve(aliasPath, Specifier.replace(Prefix, "")),
 					),
-				)
+			)
 	).reduce<null | ReturnType<typeof Import>>(
 		async (acc, path) => acc || (await Import(path)),
 		null,
@@ -77,5 +76,5 @@ export const { default: Import } = await import("@Function/Resolve/Import");
 
 export const { resolve, relative, dirname } = await import("path");
 
-import type Alias from "../Interface/Alias";
-import type ProgramPaths from "../Interface/ProgramPaths";
+import type Alias from "../Interface/Alias.tsx";
+import type ProgramPaths from "../Interface/ProgramPaths.tsx";
