@@ -24,5 +24,5 @@ export declare const Import: (Path: string) => Promise<{
     Type: "directory";
 } | null>;
 export declare const resolve: (...paths: string[]) => string, relative: (from: string, to: string) => string, dirname: (path: string) => string;
-import type Alias from "../Interface/Alias";
-import type ProgramPaths from "../Interface/ProgramPaths";
+import type Alias from "../Interface/Alias.tsx";
+import type ProgramPaths from "../Interface/ProgramPaths.tsx";

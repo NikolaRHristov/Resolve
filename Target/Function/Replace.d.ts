@@ -13,6 +13,6 @@ export declare const _Function: (filePath: string, Alias: Alias[], Path: Pick<Pr
 }>;
 export default _Function;
 export declare const Normalize: (Path: string) => string;
-import type Alias from "../Interface/Alias";
-import type ProgramPaths from "../Interface/ProgramPaths";
-import type TextChange from "../Interface/TextChange";
+import type Alias from "../Interface/Alias.tsx";
+import type ProgramPaths from "../Interface/ProgramPaths.tsx";
+import type TextChange from "../Interface/TextChange.tsx";
