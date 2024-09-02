@@ -26,7 +26,6 @@ being able to ship working JavaScript code.
     }
   },
 }
-
 ```
 
 The following types of paths are currently supported:
