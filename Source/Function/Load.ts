@@ -1,3 +1,5 @@
+import type TSConfig from "../Interface/TSConfig.tsx";
+
 /**
  * Load the tsconfig file using Typescript's built-in config file loader.
  *
@@ -29,5 +31,3 @@ export const _Function = async (Path: string): Promise<TSConfig> => {
 export default _Function;
 
 export const { sys } = await import("typescript");
-
-import type TSConfig from "../Interface/TSConfig.tsx";

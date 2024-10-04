@@ -1,3 +1,5 @@
+import type Alias from "../Interface/Alias.js";
+
 /**
  * Compute the alias paths provided by the tsconfig.
  *
@@ -37,8 +39,6 @@ export const _Function = async (
 
 	return Alias;
 };
-
-import type Alias from "../Interface/Alias.js";
 
 export const Regex = /\*$/;
 

@@ -1,3 +1,7 @@
+import type Alias from "../Interface/Alias.js";
+import type Change from "../Interface/Change.js";
+import type ProgramPaths from "../Interface/ProgramPaths.js";
+
 /**
  * Generate the alias path mapping changes to apply to the provide files.
  *
@@ -29,7 +33,3 @@ export default (
 
 	return Change;
 };
-
-import type Alias from "../Interface/Alias.js";
-import type Change from "../Interface/Change.js";
-import type ProgramPaths from "../Interface/ProgramPaths.js";

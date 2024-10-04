@@ -1,3 +1,5 @@
+import type Change from "../Interface/Change.js";
+
 /**
  * Apply the file changes.
  *
@@ -9,5 +11,3 @@ export default (Change: Change[]) =>
 			encoding: "utf-8",
 		}),
 	);
-
-import type Change from "../Interface/Change.js";
