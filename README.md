@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
 
 If you use Typescript's
-[path mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
+[`path mapping`](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
 feature to avoid `../../../../../` in your imports, you may have found that
 compiling with `tsc` doesn't convert your aliases to proper relative paths. This
 causes problems as the compiled JavaScript code can't actually run with those
@@ -47,7 +47,7 @@ import data from "~/some/data/path.json";
 ```
 
 _NOTE: When importing JSON files, ensure that you use the `.json` extension. See
-issue [#253](https://github.com/PlayForm/Resolve/issues/253)._
+issue [`#253`](https://github.com/PlayForm/Resolve/issues/253)._
 
 **ESM dynamic imports**
 
@@ -65,7 +65,7 @@ export { stuff as myStuff } from "~/some/path.mjs";
 ```
 
 **Node.JS
-[require.resolve](https://nodejs.org/api/modules.html#requireresolverequest-options)**
+[`require.resolve`](https://nodejs.org/api/modules.html#requireresolverequest-options)**
 
 ```ts
 const path = require.resolve("~/some/path");
@@ -74,7 +74,7 @@ const path = require.resolve("~/some/path");
 ## CLI Usage
 
 1. Install as a dev dependency using npm or yarn, along with
-   [Typescript](https://www.npmjs.com/package/typescript) 3.x or later.
+   [`Typescript`](https://www.npmjs.com/package/typescript) 3.x or later.
 
     ```sh
     yarn add -D @playform/resolve typescript
@@ -97,7 +97,7 @@ const path = require.resolve("~/some/path");
 ## Programmatic Usage
 
 1. Install as a dev dependency using npm or yarn, along with
-   [Typescript](https://www.npmjs.com/package/typescript) 3.x or later.
+   [`Typescript`](https://www.npmjs.com/package/typescript) 3.x or later.
 
     ```sh
     yarn add -D @playform/resolve typescript
@@ -166,4 +166,4 @@ _This option is only available when using the CLI._
 
 ## Changelog
 
-See [CHANGELOG.md](CHANGELOG.md) for a history of changes to this component.
+See [`CHANGELOG.md`](CHANGELOG.md) for a history of changes to this component.
