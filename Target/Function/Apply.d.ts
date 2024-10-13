@@ -1,3 +1,5 @@
+import type Change from "../Interface/Change.js";
+
 /**
  * Apply the file changes.
  *
@@ -5,4 +7,3 @@
  */
 declare const _default: (Change: Change[]) => void;
 export default _default;
-import type Change from "../Interface/Change.js";
