@@ -1,7 +1,6 @@
 # ⛵ [Resolve] —
 
 [![npm](https://img.shields.io/npm/v/@playform/resolve?style=flat-square)](https://www.npmjs.com/package/@playform/resolve)
-[![license](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
 
 If you use Typescript's
 [`path mapping`](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
