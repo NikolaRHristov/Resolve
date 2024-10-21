@@ -1,5 +1,4 @@
 import type Change from "../Interface/Change.js";
-
 /**
  * Apply the file changes.
  *

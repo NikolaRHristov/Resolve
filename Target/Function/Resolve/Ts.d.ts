@@ -1,9 +1,5 @@
 import type ProgramOptions from "../Interface/ProgramOptions.tsx";
-
-export type ResolveTsPathOptions = Omit<
-	Partial<ProgramOptions>,
-	"verbose" | "noEmit"
->;
+export type ResolveTsPathOptions = Omit<Partial<ProgramOptions>, "verbose" | "noEmit">;
 /**
  * Convert Typescript path aliases to proper relative paths
  * in your transpiled JavaScript code.
