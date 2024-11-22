@@ -1,6 +1,7 @@
 import type Alias from "../Interface/Alias.tsx";
 import type ProgramPaths from "../Interface/ProgramPaths.tsx";
 import type TextChange from "../Interface/TextChange.tsx";
+
 /**
  * Read the file at the given path and return the text with aliased paths replaced.
  *
@@ -9,10 +10,14 @@ import type TextChange from "../Interface/TextChange.tsx";
  * @param programPaths Program options.
  *
  */
-export declare const _Function: (filePath: string, Alias: Alias[], Path: Pick<ProgramPaths, "Source" | "Target">) => Promise<{
-    Changed: boolean;
-    Text: string;
-    Change: TextChange[];
+export declare const _Function: (
+	filePath: string,
+	Alias: Alias[],
+	Path: Pick<ProgramPaths, "Source" | "Target">,
+) => Promise<{
+	Changed: boolean;
+	Text: string;
+	Change: TextChange[];
 }>;
 export default _Function;
 export declare const Normalize: (Path: string) => string;

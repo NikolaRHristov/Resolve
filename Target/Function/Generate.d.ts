@@ -1,6 +1,7 @@
 import type Alias from "../Interface/Alias.js";
 import type Change from "../Interface/Change.js";
 import type ProgramPaths from "../Interface/ProgramPaths.js";
+
 /**
  * Generate the alias path mapping changes to apply to the provide files.
  *
@@ -9,5 +10,9 @@ import type ProgramPaths from "../Interface/ProgramPaths.js";
  * @param programPaths Program options.
  *
  */
-declare const _default: (File: string[], Alias: Alias[], Path: Pick<ProgramPaths, "Source" | "Target">) => Change[];
+declare const _default: (
+	File: string[],
+	Alias: Alias[],
+	Path: Pick<ProgramPaths, "Source" | "Target">,
+) => Change[];
 export default _default;
