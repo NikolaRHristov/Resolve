@@ -33,6 +33,7 @@ export default class {
 			for (const key of keys) {
 				// biome-ignore lint/suspicious/noExplicitAny:
 				let value = params[key as keyof typeof params] as any;
+
 				if (typeof value === "string") {
 					value = green(value);
 				}
