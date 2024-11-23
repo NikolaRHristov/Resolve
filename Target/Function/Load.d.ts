@@ -1,5 +1,4 @@
 import type TSConfig from "../Interface/TSConfig.tsx";
-
 /**
  * Load the tsconfig file using Typescript's built-in config file loader.
  *
