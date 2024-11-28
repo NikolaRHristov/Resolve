@@ -1,9 +1,9 @@
 # ⛵ [Resolve] —
 
-[![npm](https://img.shields.io/npm/v/@playform/resolve?style=flat-square)](https://www.npmjs.com/package/@playform/resolve)
+[![npm](HTTPS://img.shields.io/npm/v/@playform/resolve?style=flat-square)](HTTPS://www.npmjs.com/package/@playform/resolve)
 
 If you use Typescript's
-[`path mapping`](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
+[`path mapping`](HTTPS://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
 feature to avoid `../../../../../` in your imports, you may have found that
 compiling with `tsc` doesn't convert your aliases to proper relative paths. This
 causes problems as the compiled JavaScript code can't actually run with those
@@ -46,7 +46,7 @@ import data from "~/some/data/path.json";
 ```
 
 _NOTE: When importing JSON files, ensure that you use the `.json` extension. See
-issue [`#253`](https://github.com/PlayForm/Resolve/issues/253)._
+issue [`#253`](HTTPS://github.com/PlayForm/Resolve/issues/253)._
 
 **ESM dynamic imports**
 
@@ -64,7 +64,7 @@ export { stuff as myStuff } from "~/some/path.mjs";
 ```
 
 **Node.JS
-[`require.resolve`](https://nodejs.org/api/modules.html#requireresolverequest-options)**
+[`require.resolve`](HTTPS://nodejs.org/api/modules.html#requireresolverequest-options)**
 
 ```ts
 const path = require.resolve("~/some/path");
@@ -73,7 +73,7 @@ const path = require.resolve("~/some/path");
 ## CLI Usage
 
 1. Install as a dev dependency using npm or yarn, along with
-   [`Typescript`](https://www.npmjs.com/package/typescript) 3.x or later.
+   [`Typescript`](HTTPS://www.npmjs.com/package/typescript) 3.x or later.
 
     ```sh
     yarn add -D @playform/resolve typescript
@@ -96,7 +96,7 @@ const path = require.resolve("~/some/path");
 ## Programmatic Usage
 
 1. Install as a dev dependency using npm or yarn, along with
-   [`Typescript`](https://www.npmjs.com/package/typescript) 3.x or later.
+   [`Typescript`](HTTPS://www.npmjs.com/package/typescript) 3.x or later.
 
     ```sh
     yarn add -D @playform/resolve typescript
