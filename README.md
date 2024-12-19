@@ -46,7 +46,7 @@ import data from "~/some/data/path.json";
 ```
 
 _NOTE: When importing JSON files, ensure that you use the `.json` extension. See
-issue [`#253`](https://github.com/PlayForm/Resolve/issues/253)._
+issue [`#253`](HTTPS://GitHub.Com/PlayForm/Resolve/issues/253)._
 
 **ESM dynamic imports**
 
