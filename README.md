@@ -1,4 +1,4 @@
-# ⛵ [Resolve] —
+# [Resolve] ⛵
 
 [![npm](https://img.shields.io/npm/v/@playform/resolve?style=flat-square)](https://www.npmjs.com/package/@playform/resolve)
 
