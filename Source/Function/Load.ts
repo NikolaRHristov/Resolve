@@ -24,7 +24,7 @@ export const _Function = async (Path: string): Promise<TSConfig> => {
 		(await import("typescript")).readConfigFile(NameConfig, sys.readFile)
 			.config,
 		sys,
-		(await import("path")).dirname(NameConfig),
+		(await import("node:path")).dirname(NameConfig),
 	);
 };
 

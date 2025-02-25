@@ -24,6 +24,6 @@ export default async (Target: string, Extension: string[]) => {
 					onlyFiles: true,
 				},
 			)
-		).map(async (Path) => (await import("path")).resolve(Path)),
+		).map(async (Path) => (await import("node:path")).resolve(Path)),
 	);
 };

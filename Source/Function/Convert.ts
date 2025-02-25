@@ -46,9 +46,9 @@ export default async (
 
 	const Relative =
 		Absolute.Type === "file"
-			? (await import("path")).join(
+			? (await import("node:path")).join(
 					relative(Directory, dirname(ImportAbsolute)),
-					(await import("path")).basename(ImportAbsolute),
+					(await import("node:path")).basename(ImportAbsolute),
 				)
 			: relative(Directory, ImportAbsolute)
 					.replace(/^(?!\.+\/)/, (m) => `./${m}`)
@@ -78,4 +78,4 @@ export const { default: Normalize } = await import("@Function/Normalize");
 
 export const { default: Import } = await import("@Function/Resolve/Import");
 
-export const { resolve, relative, dirname } = await import("path");
+export const { resolve, relative, dirname } = await import("node:path");

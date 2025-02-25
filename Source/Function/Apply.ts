@@ -7,7 +7,7 @@ import type Change from "../Interface/Change.js";
  */
 export default (Change: Change[]) =>
 	Change.forEach(async ({ File, Text }) =>
-		(await import("fs/promises")).writeFile(File, Text, {
+		(await import("node:fs/promises")).writeFile(File, Text, {
 			encoding: "utf-8",
 		}),
 	);

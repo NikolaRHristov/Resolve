@@ -14,7 +14,7 @@ export const _Function = async (
 			Prefix: Alias.replace(Regex, ""),
 			Path: await Promise.all(
 				Path[Alias]?.map(async (Path: string) =>
-					(await import("path")).resolve(
+					(await import("node:path")).resolve(
 						Base,
 						Path.replace(Regex, ""),
 					),
