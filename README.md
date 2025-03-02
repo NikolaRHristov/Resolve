@@ -140,12 +140,12 @@ tsconfig if not provided.
 Provide a space-delimited list of file extensions in the output directory that
 the program should process. Defaults to the following extensions:
 
--   `js`
--   `mjs`
--   `cjs`
--   `d.ts`
--   `d.mts`
--   `d.cts`
+- `js`
+- `mjs`
+- `cjs`
+- `d.ts`
+- `d.mts`
+- `d.cts`
 
 #### `--verbose`
 
